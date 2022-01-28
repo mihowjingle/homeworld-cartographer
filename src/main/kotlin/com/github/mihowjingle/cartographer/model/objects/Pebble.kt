@@ -13,5 +13,5 @@ data class Pebble(val type: Type, val position: Position) {
     }
 
     // todo last 3 numbers...? rotation?
-    fun toLua() = "addPebble(\"${type.label}\", {${position.x}, ${position.y}, ${position.z}}, 0.0, 0.0, 0.0)"
+    fun toLua() = "addPebble(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, 0.0, 0.0, 0.0)"
 }
