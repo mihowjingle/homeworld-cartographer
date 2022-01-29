@@ -33,8 +33,8 @@ function NonDetermChunk()
 
 	setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})
 
-	setDefaultMusic("${defaultMusic.label}")
-	setBattleMusic("${battleMusic.label}")
+	setDefaultMusic("${defaultMusic.path}")
+	setBattleMusic("${battleMusic.path}")
 end
 
 $playersChunk
