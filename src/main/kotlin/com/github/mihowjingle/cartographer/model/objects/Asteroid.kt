@@ -2,7 +2,7 @@ package com.github.mihowjingle.cartographer.model.objects
 
 import com.github.mihowjingle.cartographer.model.common.Position
 
-data class Asteroid(val type: Type, val position: Position, val percentOfDefaultRus: Int) {
+data class Asteroid(val type: Type, val position: Position, val percentOfDefaultRus: Int) : Entity {
     enum class Type(val label: String, val defaultRus: Int, val maxSupportedCollectors: Int) {
 
         // found in existing HW2 maps
@@ -26,5 +26,5 @@ data class Asteroid(val type: Type, val position: Position, val percentOfDefault
     val effectiveRus = percentOfDefaultRus * type.defaultRus / 100
 
     // todo last 4 numbers...?
-    fun toLua() = "addAsteroid(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, $percentOfDefaultRus, 0.000, 0.000, 0.000, 0)"
+    override fun toLua() = "addAsteroid(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, $percentOfDefaultRus, 0.000, 0.000, 0.000, 0)"
 }

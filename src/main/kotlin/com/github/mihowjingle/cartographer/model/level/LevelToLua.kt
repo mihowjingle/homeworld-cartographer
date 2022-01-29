@@ -1,5 +1,6 @@
 package com.github.mihowjingle.cartographer.model.level
 
+import com.github.mihowjingle.cartographer.model.objects.Entity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -11,9 +12,9 @@ fun Level.toLua() =
 -- by yours truly, $author
 
 function DetermChunk()
-    >>STARTING_POSITIONS<<
+$startingPositionsChunk
     
-    >>ASTEROIDS<<
+$asteroidsChunk
     
     >>CLOUDS_NEBULAE_ETC<<
     
@@ -21,9 +22,9 @@ function DetermChunk()
 end
 
 function NonDetermChunk()
-    >>PEBBLES<<
+$pebblesChunk
 
-    $fogChunk
+$fogChunk
 
 	setGlareIntensity($glareIntensity)
 
@@ -40,7 +41,24 @@ end
 $playersChunk
 """
 
-// todo starting positions, asteroids, dust clouds, nebulae, pebbles
+// todo dust clouds, nebulae... megaliths?
+
+private fun chunk(entities: Iterable<Entity>): String {
+    val sb = StringBuilder("")
+    for (e in entities) {
+        sb.append("    " + e.toLua() + "\n")
+    }
+    return sb.toString()
+}
+
+private val Level.startingPositionsChunk: String
+    get() = chunk(startingPositions)
+
+private val Level.asteroidsChunk: String
+    get() = chunk(asteroids)
+
+private val Level.pebblesChunk: String
+    get() = chunk(pebbles)
 
 private fun playerChunk(index: Int): String {
     return """
@@ -77,6 +95,6 @@ private val Level.fogChunk: String
             	fogSetDensity(${fog.density})
             """.replaceIndent("    ")
         } else {
-            "fogSetActive(0)"
+            "    fogSetActive(0)"
         }
     }

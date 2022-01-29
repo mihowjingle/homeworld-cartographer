@@ -5,7 +5,7 @@ import com.github.mihowjingle.cartographer.model.common.Position
 /**
  * "Pebble_3" crashes the game, allegedly
  */
-data class Pebble(val type: Type, val position: Position) {
+data class Pebble(val type: Type, val position: Position) : Entity {
     enum class Type(val label: String) {
         PEBBLE_0("Pebble_0"),
         PEBBLE_1("Pebble_1"),
@@ -13,5 +13,5 @@ data class Pebble(val type: Type, val position: Position) {
     }
 
     // todo last 3 numbers...? rotation?
-    fun toLua() = "addPebble(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, 0.0, 0.0, 0.0)"
+    override fun toLua() = "addPebble(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, 0.0, 0.0, 0.0)"
 }

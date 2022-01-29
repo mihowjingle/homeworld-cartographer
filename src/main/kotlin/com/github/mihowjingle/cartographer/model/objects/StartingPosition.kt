@@ -6,7 +6,7 @@ import com.github.mihowjingle.cartographer.model.common.Rotation
 /**
  * Player index can be 0..7
  */
-data class StartingPosition(val playerIndex: Int, val position: Position, val rotation: Rotation) {
+data class StartingPosition(val playerIndex: Int, val position: Position, val rotation: Rotation) : Entity {
 
     init {
         if (playerIndex !in 0..7) {
@@ -14,5 +14,6 @@ data class StartingPosition(val playerIndex: Int, val position: Position, val ro
         }
     }
 
-    fun toLua() = "addPoint(\"StartPos$playerIndex\", {${position.x}, ${position.z}, ${position.y}}, {${rotation.xAxis}, ${rotation.zAxis}, ${rotation.yAxis}})"
+    override fun toLua() =
+        "addPoint(\"StartPos$playerIndex\", {${position.x}, ${position.z}, ${position.y}}, {${rotation.xAxis}, ${rotation.zAxis}, ${rotation.yAxis}})"
 }
