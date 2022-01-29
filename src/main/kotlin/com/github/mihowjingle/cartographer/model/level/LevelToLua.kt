@@ -22,6 +22,8 @@ $dustCloudsChunk
 
 $nebulaeChunk
 
+$salvageChunk
+
 [megaliths?]
 
     setWorldBoundsInner({0.00, 0.00, 0.00}, {${volume.x}, ${volume.z}, ${volume.y}})
@@ -76,6 +78,9 @@ private val Level.dustCloudsChunk: String
 
 private val Level.nebulaeChunk: String
     get() = chunk(nebulae)
+
+private val Level.salvageChunk: String
+    get() = chunk(salvage)
 
 private fun playerChunk(index: Int): String {
     return """

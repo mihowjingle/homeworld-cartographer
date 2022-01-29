@@ -22,6 +22,7 @@ data class Level(
     val clouds: List<Cloud>,
     val dustClouds: List<DustCloud>,
     val nebulae: List<Nebula>,
+    val salvage: List<Salvage>,
 
     // ?? only even seen 0.000000, 0.000000, 0.000000, 1.0 and sometimes even not at all in file,
     // after brief testing, no apparent change
