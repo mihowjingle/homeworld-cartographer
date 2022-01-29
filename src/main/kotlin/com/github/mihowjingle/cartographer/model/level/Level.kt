@@ -19,6 +19,7 @@ data class Level(
     val pebbles: List<Pebble>,
     val asteroids: List<Asteroid>,
     val startingPositions: List<StartingPosition>,
+    val clouds: List<Cloud>,
     val dustClouds: List<DustCloud>,
     val nebulae: List<Nebula>,
 

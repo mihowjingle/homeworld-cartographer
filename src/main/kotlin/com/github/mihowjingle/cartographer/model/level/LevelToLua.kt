@@ -16,6 +16,8 @@ $startingPositionsChunk
 
 $asteroidsChunk
 
+$cloudsChunk
+
 $dustCloudsChunk
 
 $nebulaeChunk
@@ -45,7 +47,7 @@ end
 $playersChunk
 """
 
-// todo clouds, megaliths?
+// todo salvage, megaliths?
 
 // todo investigate: clouds vs dust clouds vs nebulae
 
@@ -65,6 +67,9 @@ private val Level.asteroidsChunk: String
 
 private val Level.pebblesChunk: String
     get() = chunk(pebbles)
+
+private val Level.cloudsChunk: String
+    get() = chunk(clouds)
 
 private val Level.dustCloudsChunk: String
     get() = chunk(dustClouds)
