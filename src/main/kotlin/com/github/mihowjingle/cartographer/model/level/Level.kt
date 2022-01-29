@@ -3,10 +3,7 @@ package com.github.mihowjingle.cartographer.model.level
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.IntConstraint
 import com.github.mihowjingle.cartographer.model.common.Volume
-import com.github.mihowjingle.cartographer.model.objects.Asteroid
-import com.github.mihowjingle.cartographer.model.objects.DustCloud
-import com.github.mihowjingle.cartographer.model.objects.Pebble
-import com.github.mihowjingle.cartographer.model.objects.StartingPosition
+import com.github.mihowjingle.cartographer.model.objects.*
 
 data class Level(
     val author: String,
@@ -23,6 +20,7 @@ data class Level(
     val asteroids: List<Asteroid>,
     val startingPositions: List<StartingPosition>,
     val dustClouds: List<DustCloud>,
+    val nebulae: List<Nebula>,
 
     // ?? only even seen 0.000000, 0.000000, 0.000000, 1.0 and sometimes even not at all in file,
     // after brief testing, no apparent change

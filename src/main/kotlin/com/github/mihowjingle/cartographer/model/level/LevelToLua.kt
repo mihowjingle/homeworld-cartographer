@@ -18,7 +18,7 @@ $asteroidsChunk
 
 $dustCloudsChunk
 
-[nebulae]
+$nebulaeChunk
 
 [megaliths?]
 
@@ -45,7 +45,9 @@ end
 $playersChunk
 """
 
-// todo nebulae... megaliths?
+// todo clouds, megaliths?
+
+// todo investigate: clouds vs dust clouds vs nebulae
 
 private fun chunk(entities: Iterable<Entity>): String {
     val sb = StringBuilder("")
@@ -66,6 +68,9 @@ private val Level.pebblesChunk: String
 
 private val Level.dustCloudsChunk: String
     get() = chunk(dustClouds)
+
+private val Level.nebulaeChunk: String
+    get() = chunk(nebulae)
 
 private fun playerChunk(index: Int): String {
     return """
