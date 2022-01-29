@@ -30,7 +30,7 @@ data class Level(
 
     // ?? only ever seen 0.000000 and sometimes even not at all in file,
     // after brief testing, no apparent change
-    val glareIntensity: Number = 0.0
+    val glareIntensity: Double = 0.0
 ) {
     init {
         if (maxPlayers !in 2..8) { // actually maybe 1 player too? but would that be interesting anyway?

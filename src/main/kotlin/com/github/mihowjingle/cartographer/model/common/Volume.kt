@@ -5,4 +5,4 @@ package com.github.mihowjingle.cartographer.model.common
  * 60km above and 60km below the sensor manager plane
  */
 // todo which is width, which is depth? also would be nice to relate to the 0, 90, 180, 270 markers
-data class Volume(val x: Number, val z: Number, val y: Number)
+data class Volume(val x: Double, val z: Double, val y: Double)

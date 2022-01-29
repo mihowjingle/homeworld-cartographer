@@ -3,7 +3,14 @@ package com.github.mihowjingle.cartographer.model.objects
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Position
 
-data class DustCloud(val name: String, val type: Type, val position: Position, val color: Color, val unknown: Number, val size: Number) : Entity {
+data class DustCloud(
+    val name: String,
+    val type: Type,
+    val position: Position,
+    val color: Color,
+    val initialRotationDegrees: Double, // probably
+    val size: Double
+) : Entity {
     enum class Type(val label: String) {
         DC_0("DustCloud_0"),
         DC_NO_RES("DustCloud_NoRes"),
@@ -17,5 +24,5 @@ data class DustCloud(val name: String, val type: Type, val position: Position, v
     }
 
     override fun toLua() =
-        "addDustCloud(\"$name\",\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, {${color.r}, ${color.g}, ${color.b}, ${color.a}}, $unknown, $size)"
+        "addDustCloud(\"$name\",\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, {${color.r}, ${color.g}, ${color.b}, ${color.a}}, $initialRotationDegrees, $size)"
 }
