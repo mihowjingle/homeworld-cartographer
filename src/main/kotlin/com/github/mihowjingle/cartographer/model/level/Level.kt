@@ -13,8 +13,14 @@ data class Level(
     val defaultMusic: Music,
     val battleMusic: Music,
     val fog: Fog,
-    val shadowColor: Color, // todo ?? only even seen 0.000000, 0.000000, 0.000000, 1.0 and sometimes even not at all in file
-    val glareIntensity: Number // todo ?? only ever seen 0.000000 and sometimes even not at all in file
+
+    // ?? only even seen 0.000000, 0.000000, 0.000000, 1.0 and sometimes even not at all in file,
+    // after brief testing, no apparent change
+    val shadowColor: Color = Color(0, 0, 0, 255),
+
+    // ?? only ever seen 0.000000 and sometimes even not at all in file,
+    // after brief testing, no apparent change
+    val glareIntensity: Number = 0.0
 ) {
     init {
         if (maxPlayers !in 2..8) { // actually maybe 1 player too? but would that be interesting anyway?

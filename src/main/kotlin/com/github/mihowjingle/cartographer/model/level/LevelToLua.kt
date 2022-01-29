@@ -41,9 +41,6 @@ $playersChunk
 """
 
 // todo starting positions, asteroids, dust clouds, nebulae, pebbles
-// todo investigate: (is it ever anything else, and what does it do?)
-//  setGlareIntensity(0.000000)
-//  setLevelShadowColour(0.000000, 0.000000, 0.000000, 1.0)
 
 private fun playerChunk(index: Int): String {
     return """
