@@ -13,11 +13,15 @@ fun Level.toLua() =
 
 function DetermChunk()
 $startingPositionsChunk
-    
+
 $asteroidsChunk
-    
-    >>CLOUDS_NEBULAE_ETC<<
-    
+
+$dustCloudsChunk
+
+[nebulae]
+
+[megaliths?]
+
     setWorldBoundsInner({0.00, 0.00, 0.00}, {${volume.x}, ${volume.z}, ${volume.y}})
 end
 
@@ -26,22 +30,22 @@ $pebblesChunk
 
 $fogChunk
 
-	setGlareIntensity($glareIntensity)
+    setGlareIntensity($glareIntensity)
 
-	setLevelShadowColour(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})
+    setLevelShadowColour(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})
 
-	loadBackground("${background.label}")
+    loadBackground("${background.label}")
 
-	setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})
+    setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})
 
-	setDefaultMusic("${defaultMusic.path}")
-	setBattleMusic("${battleMusic.path}")
+    setDefaultMusic("${defaultMusic.path}")
+    setBattleMusic("${battleMusic.path}")
 end
 
 $playersChunk
 """
 
-// todo dust clouds, nebulae... megaliths?
+// todo nebulae... megaliths?
 
 private fun chunk(entities: Iterable<Entity>): String {
     val sb = StringBuilder("")
@@ -59,6 +63,9 @@ private val Level.asteroidsChunk: String
 
 private val Level.pebblesChunk: String
     get() = chunk(pebbles)
+
+private val Level.dustCloudsChunk: String
+    get() = chunk(dustClouds)
 
 private fun playerChunk(index: Int): String {
     return """
