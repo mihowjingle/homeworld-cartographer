@@ -24,7 +24,7 @@ $nebulaeChunk
 
 $salvageChunk
 
-[megaliths?]
+$megalithChunk
 
     setWorldBoundsInner({0.00, 0.00, 0.00}, {${volume.x}, ${volume.z}, ${volume.y}})
 end
@@ -48,8 +48,6 @@ end
 
 $playersChunk
 """
-
-// todo salvage, megaliths?
 
 // todo investigate: clouds vs dust clouds vs nebulae
 
@@ -81,6 +79,9 @@ private val Level.nebulaeChunk: String
 
 private val Level.salvageChunk: String
     get() = chunk(salvage)
+
+private val Level.megalithChunk: String
+    get() = chunk(megaliths)
 
 private fun playerChunk(index: Int): String {
     return """

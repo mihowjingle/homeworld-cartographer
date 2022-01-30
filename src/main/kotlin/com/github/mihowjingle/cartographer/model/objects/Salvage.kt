@@ -4,6 +4,7 @@ import com.github.mihowjingle.cartographer.model.common.Position
 
 const val defaultSalvageRus = 700
 
+// todo, for salvage and asteroids, introduce constructor with desired effective RUs and then calculate what % it should be
 data class Salvage(val type: Type, val position: Position, val percentOfDefaultRus: Int) : Entity {
     enum class Type(val label: String) {
         SALVAGE_SMALL_01("Slv_Chunk_Sml01"),
