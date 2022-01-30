@@ -3,6 +3,7 @@ package com.github.mihowjingle.cartographer.model.objects
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Position
 
+// todo investigate: clouds vs dust clouds vs nebulae
 data class Cloud(
     val name: String,
     val type: Type,

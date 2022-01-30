@@ -2,11 +2,7 @@ package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.model.common.Constraint
 import com.github.mihowjingle.cartographer.model.common.Position
-import com.github.mihowjingle.cartographer.model.level.Size
-import com.github.mihowjingle.cartographer.model.level.Background
-import com.github.mihowjingle.cartographer.model.level.Fog
-import com.github.mihowjingle.cartographer.model.level.Level
-import com.github.mihowjingle.cartographer.model.level.Music
+import com.github.mihowjingle.cartographer.model.level.*
 import com.github.mihowjingle.cartographer.model.objects.Pebble
 import tornadofx.*
 
@@ -19,6 +15,7 @@ val testLevel = Level(
     Music.HW2_AMBIENT_01,
     Music.HW2_BATTLE_01,
     Fog(),
+//    Fog(true, 1000.0, 4000.0, Color(120, 120, 120, 120), 0.5),
     listOf(
         Pebble(Pebble.Type.PEBBLE_0, Position(-2.0, 0.0, 0.0)),
         Pebble(Pebble.Type.PEBBLE_1, Position(0.0, 0.0, 3.0)),

@@ -5,52 +5,57 @@ import com.github.mihowjingle.cartographer.model.objects.Entity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+fun Level.toLua() = with(StringBuilder()) {
+    appendLine("-- Created/last edited in Homeworld Cartographer on $now")
+    appendLine("-- by yours truly, $author")
+    appendLine()
+    appendLine("function DetermChunk()")
+    optionallyAppendChunk(startingPositions)
+    optionallyAppendChunk(asteroids)
+    optionallyAppendChunk(clouds)
+    optionallyAppendChunk(dustClouds)
+    optionallyAppendChunk(nebulae)
+    optionallyAppendChunk(salvage)
+    optionallyAppendChunk(megaliths)
+    appendLine("    setWorldBoundsInner({0.00, 0.00, 0.00}, {${size.x}, ${size.z}, ${size.y}})")
+    appendLine("end")
+    appendLine()
+    appendLine("function NonDetermChunk()")
+    optionallyAppendChunk(pebbles)
+    appendFog(this)
+    appendLine("    setGlareIntensity($glareIntensity)")
+    appendLine("    setLevelShadowColour(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})")
+    appendLine("    loadBackground(\"${background.label}\")")
+    appendLine("    setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})")
+    appendLine("    setDefaultMusic(\"${defaultMusic.path}\")")
+    appendLine("    setBattleMusic(\"${battleMusic.path}\")")
+    appendLine("end")
+    appendLine()
+    append(playersChunk)
+
+    toString()
+}
+
+fun Level.appendFog(sb: StringBuilder) {
+    if (fog.active) {
+        sb.appendLine("    fogSetActive(1)")
+        sb.appendLine("    fogSetStart(${fog.start})")
+        sb.appendLine("    fogSetEnd(${fog.end})")
+        sb.appendLine("    fogSetColour(${fog.color.r}, ${fog.color.g}, ${fog.color.b}, ${fog.color.a})")
+        sb.appendLine("    fogSetType(\"linear\")")
+        sb.appendLine("    fogSetDensity(${fog.density})")
+    } else {
+        sb.appendLine("    fogSetActive(0)")
+    }
+}
+
 private val now get() = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 
-fun Level.toLua() =
-"""
--- Created/last edited in Homeworld Cartographer on $now
--- by yours truly, $author
-
-function DetermChunk()
-$startingPositionsChunk
-
-$asteroidsChunk
-
-$cloudsChunk
-
-$dustCloudsChunk
-
-$nebulaeChunk
-
-$salvageChunk
-
-$megalithChunk
-
-    setWorldBoundsInner({0.00, 0.00, 0.00}, {${size.x}, ${size.z}, ${size.y}})
-end
-
-function NonDetermChunk()
-$pebblesChunk
-
-$fogChunk
-
-    setGlareIntensity($glareIntensity)
-
-    setLevelShadowColour(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})
-
-    loadBackground("${background.label}")
-
-    setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})
-
-    setDefaultMusic("${defaultMusic.path}")
-    setBattleMusic("${battleMusic.path}")
-end
-
-$playersChunk
-"""
-
-// todo investigate: clouds vs dust clouds vs nebulae
+private fun StringBuilder.optionallyAppendChunk(entities: List<Entity>) {
+    if (entities.isNotEmpty()) {
+        appendLine(chunk(entities))
+    }
+}
 
 private fun chunk(entities: Iterable<Entity>): String {
     val sb = StringBuilder("")
@@ -59,30 +64,6 @@ private fun chunk(entities: Iterable<Entity>): String {
     }
     return sb.toString()
 }
-
-private val Level.startingPositionsChunk: String
-    get() = chunk(startingPositions)
-
-private val Level.asteroidsChunk: String
-    get() = chunk(asteroids)
-
-private val Level.pebblesChunk: String
-    get() = chunk(pebbles)
-
-private val Level.cloudsChunk: String
-    get() = chunk(clouds)
-
-private val Level.dustCloudsChunk: String
-    get() = chunk(dustClouds)
-
-private val Level.nebulaeChunk: String
-    get() = chunk(nebulae)
-
-private val Level.salvageChunk: String
-    get() = chunk(salvage)
-
-private val Level.megalithChunk: String
-    get() = chunk(megaliths)
 
 private fun playerChunk(index: Int): String {
     return """
@@ -93,8 +74,6 @@ private fun playerChunk(index: Int): String {
             raceName = "Hiigaran",
             startPos = 1
         }
-        
-        
         """.trimIndent()
 }
 
@@ -103,22 +82,9 @@ private val Level.playersChunk: String
         val s = StringBuilder("maxPlayers = $maxPlayers\n\nplayer = {}\n\n")
         for (i in 0 until maxPlayers) {
             s.append(playerChunk(i))
+            if (i < maxPlayers - 1) {
+                s.appendLine("\n")
+            }
         }
         return s.toString()
-    }
-
-private val Level.fogChunk: String
-    get() {
-        return if (fog.active) {
-            """
-                fogSetActive(1)
-            	fogSetStart(${fog.start})
-            	fogSetEnd(${fog.end})
-            	fogSetColour(${fog.color.r}, ${fog.color.g}, ${fog.color.b}, ${fog.color.a})
-            	fogSetType("linear")
-            	fogSetDensity(${fog.density})
-            """.replaceIndent("    ")
-        } else {
-            "    fogSetActive(0)"
-        }
     }
