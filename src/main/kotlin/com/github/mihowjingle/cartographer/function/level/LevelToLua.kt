@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.function
+package com.github.mihowjingle.cartographer.function.level
 
 import com.github.mihowjingle.cartographer.model.level.Level
 import com.github.mihowjingle.cartographer.model.objects.Entity

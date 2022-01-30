@@ -2,8 +2,6 @@ package com.github.mihowjingle.cartographer.model.objects
 
 import com.github.mihowjingle.cartographer.model.common.Position
 
-const val defaultSalvageRus = 700
-
 // todo, for salvage and asteroids, introduce constructor with desired effective RUs and then calculate what % it should be
 data class Salvage(val type: Type, val position: Position, val percentOfDefaultRus: Int) : Entity {
     enum class Type(val label: String) {
@@ -22,7 +20,10 @@ data class Salvage(val type: Type, val position: Position, val percentOfDefaultR
         SALVAGE_LARGE_05("Slv_Chunk_Lrg05")
     }
 
-    val effectiveRus = percentOfDefaultRus * defaultSalvageRus / 100
+    /**
+     * Default RUs per salvage is 700
+     */
+    val effectiveRus = percentOfDefaultRus * 7
 
     // todo last 4 numbers? rotation probably...? and size?
     override fun toLua() = "addSalvage(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, $percentOfDefaultRus, 0, 0, 0, 0)"
