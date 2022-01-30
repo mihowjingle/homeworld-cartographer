@@ -12,20 +12,15 @@ data class Nebula(
     val size: Double
 ) : Entity {
     enum class Type(val label: String) {
-        NEBULA_M05_DC_NEBULA("M05_DustCloud_Nebula"),
-        NEBULA_M05_BC_NO_RES("M05_NebualDustCloud_NoRes"), // Nebual? todo after brief research: yes, but seems to be deprecated, test
-        NEBULA_M05_DC_NO_RES2("M05_NebualDustCloud_NoRes2"),
-        NEBULA_M05_DC_NO_RES3("M05_NebualDustCloud_NoRes3"),
-        NEBULA_M07_FOUNDRY_RADIATION("M07_Foundry_Radiation"),
-        NEBULA_M08_NO_DAMAGE_RADIATION("M08_NoDamage_Radiation"),
-        NEBULA_M11_BENTUSI_DEBRIS("M11_Bentusi_Debris"),
-        NEBULA_M11_BENTUSI_RADIATION("M11_Bentusi_Radiation"),
-        NEBULA_MP_BENTUSI_RADIATION("MP_Bentusi_Radiation"),
-        NEBULA_01_CREAM("Nebula01_Cream"),
-        NEBULA_01_TEAL("Nebula01_Teal"),
-        NEBULA_0("Nebula_0"),
-        NEBULA_HIDING("Nebula_Hiding"),
-        NEBULA_RADIATION("Radiation")
+        NEBULA_M07_FOUNDRY_RADIATION("M07_Foundry_Radiation"), // a bit ugly but ok (weird reaction to light)
+        NEBULA_M08_NO_DAMAGE_RADIATION("M08_NoDamage_Radiation"), // a bit ugly but ok (weird reaction to light)
+        NEBULA_M11_BENTUSI_DEBRIS("M11_Bentusi_Debris"), // ok
+        NEBULA_M11_BENTUSI_RADIATION("M11_Bentusi_Radiation"), // ok
+        NEBULA_MP_BENTUSI_RADIATION("MP_Bentusi_Radiation"), // nice! recommended
+        NEBULA_01_CREAM("Nebula01_Cream"), // a bit ugly but ok (weird reaction to light)
+        NEBULA_01_TEAL("Nebula01_Teal"), // a bit ugly but ok (weird reaction to light)
+        NEBULA_0("Nebula_0"), // ok
+        NEBULA_RADIATION("Radiation") // a bit ugly but ok (weird reaction to light)
     }
 
     override fun toLua() = "addNebula(\"$name\", \"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, " +
