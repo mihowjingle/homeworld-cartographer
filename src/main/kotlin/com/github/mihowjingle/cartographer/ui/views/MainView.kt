@@ -37,7 +37,6 @@ val testLevel = Level(
 )
 
 class MainView : View("Homeworld Cartographer") {
-
     override val root = vbox {
         style {
             paddingAll = 10

@@ -9,7 +9,7 @@ data class Level(
     val author: String,
     val background: Background,
     val maxPlayers: Int,
-    val volume: Volume, // todo like... both ways, or only one from center? (diameter vs radius)
+    val volume: Volume,
     val sensorsManagerCameraDistances: IntConstraint,
     val defaultMusic: Music,
     val battleMusic: Music,
