@@ -1,6 +1,6 @@
 package com.github.mihowjingle.cartographer.model.common
 /**
- * Yes, this basically [Position], but... names matter (tm)
+ * Yes, this is basically [Position], but... names matter (tm)
  * The numbers are like radius rather than diameter, for example z of 60_000 means 120_000 total height.
  * 60km above and 60km below the sensor manager plane
  */

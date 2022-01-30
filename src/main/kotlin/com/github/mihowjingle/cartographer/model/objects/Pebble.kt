@@ -12,6 +12,11 @@ data class Pebble(val type: Type, val position: Position) : Entity {
         PEBBLE_2("Pebble_2")
     }
 
+    val label by type::label
+    val x by position::x
+    val z by position::z
+    val y by position::y
+
     // todo last 3 numbers...? rotation?
     override fun toLua() = "addPebble(\"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, 0.0, 0.0, 0.0)"
 }
