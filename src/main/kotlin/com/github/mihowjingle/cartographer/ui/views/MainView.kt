@@ -43,7 +43,7 @@ class MainView : View("Homeworld Cartographer") {
             paddingAll = 10
         }
         button("Show pebbles").action {
-                find<PebblesModal>(mapOf(PebblesModal::pebbles to testLevel.pebbles)).openModal()
+            find<PebblesModal>(mapOf(PebblesModal::pebbles to testLevel.pebbles)).openModal()
         }
     }
 }
