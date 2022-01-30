@@ -5,7 +5,7 @@ import com.github.mihowjingle.cartographer.model.objects.Entity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-private val now get() = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm"))
+private val now get() = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 
 fun Level.toLua() =
 """
