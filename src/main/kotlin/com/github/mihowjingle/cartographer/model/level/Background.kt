@@ -29,7 +29,8 @@ enum class Background(val label: String, val description: String) {
     HW2_12("m12", "Thaddis Sabbah"),
     HW2_13("m13", "Balcora Gate"),
     HW2_14("m14", "Balcora"),
-    HW2_15("m15", "Hiigara (HW2)");
+    HW2_15("m15", "Hiigara (HW2)"),
+    BLACK("black", "unfinished, pretty cool, lower quality, light doesn't light up ships");
 
     val dropdownLabel = "$label: $description"
     val thumbnailPath = "resources/backgrounds/$label.jpg"
