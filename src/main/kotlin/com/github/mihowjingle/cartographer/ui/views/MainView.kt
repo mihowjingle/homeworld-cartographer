@@ -2,7 +2,7 @@ package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.model.common.Constraint
 import com.github.mihowjingle.cartographer.model.common.Position
-import com.github.mihowjingle.cartographer.model.common.Volume
+import com.github.mihowjingle.cartographer.model.level.Size
 import com.github.mihowjingle.cartographer.model.level.Background
 import com.github.mihowjingle.cartographer.model.level.Fog
 import com.github.mihowjingle.cartographer.model.level.Level
@@ -14,7 +14,7 @@ val testLevel = Level(
     "Arthur Authorsson",
     Background.HW2_01,
     3,
-    Volume(120000.0, 100000.0, 120000.0),
+    Size(120000.0, 100000.0, 120000.0),
     Constraint(10000.0, 100000.0),
     Music.HW2_AMBIENT_01,
     Music.HW2_BATTLE_01,

@@ -1,5 +1,6 @@
-package com.github.mihowjingle.cartographer.model.level
+package com.github.mihowjingle.cartographer.function
 
+import com.github.mihowjingle.cartographer.model.level.Level
 import com.github.mihowjingle.cartographer.model.objects.Entity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -26,7 +27,7 @@ $salvageChunk
 
 $megalithChunk
 
-    setWorldBoundsInner({0.00, 0.00, 0.00}, {${volume.x}, ${volume.z}, ${volume.y}})
+    setWorldBoundsInner({0.00, 0.00, 0.00}, {${size.x}, ${size.z}, ${size.y}})
 end
 
 function NonDetermChunk()

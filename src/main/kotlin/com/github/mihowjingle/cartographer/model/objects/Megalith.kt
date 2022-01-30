@@ -1,14 +1,14 @@
 package com.github.mihowjingle.cartographer.model.objects
 
+import com.github.mihowjingle.cartographer.model.common.Orientation
 import com.github.mihowjingle.cartographer.model.common.Position
-import com.github.mihowjingle.cartographer.model.common.Rotation
 
 data class Megalith(
     val name: String,
     val type: Type,
     val position: Position,
     val ownerPlayerIndex: Int,
-    val rotation: Rotation,
+    val orientation: Orientation,
     val numberOfShips: Int = 0,
     val createInHyperspace: Boolean = false
 ) : Entity {
@@ -16,7 +16,7 @@ data class Megalith(
     override fun toLua(): String {
         val createInHyperspaceDigit = if (createInHyperspace) 1 else 0
         return "addSquadron(\"$name\", \"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, $ownerPlayerIndex, " +
-                "{${rotation.xAxis}, ${rotation.zAxis}, ${rotation.yAxis}}, $numberOfShips, $createInHyperspaceDigit)"
+                "{${orientation.xAxis}, ${orientation.zAxis}, ${orientation.yAxis}}, $numberOfShips, $createInHyperspaceDigit)"
     }
 
     enum class Type(val label: String) {

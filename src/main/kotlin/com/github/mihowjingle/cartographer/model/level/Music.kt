@@ -1,7 +1,5 @@
 package com.github.mihowjingle.cartographer.model.level
 
-private const val pathCommon = "data:sound/music/"
-
 enum class Music(pathSuffix: String, val description: String) {
     HW1_AMBIENT_00("ambient/tutorial", "HW1 Tutorial"),
     HW1_AMBIENT_01("ambient/a01_mission1", "Kharak Ambient"),
@@ -44,5 +42,5 @@ enum class Music(pathSuffix: String, val description: String) {
     HW2_BATTLE_SAJUUK("battle/battle_sajuuk", "Battle For Sajuuk"),
     HW2_BENTUS_ARRIVAL("battle/bentus_arrival", "Bentus Arrives (HW2, Sarum)");
 
-    val path = pathCommon + pathSuffix
+    val path = "data:sound/music/$pathSuffix"
 }

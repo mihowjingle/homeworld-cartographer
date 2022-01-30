@@ -2,14 +2,13 @@ package com.github.mihowjingle.cartographer.model.level
 
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Constraint
-import com.github.mihowjingle.cartographer.model.common.Volume
 import com.github.mihowjingle.cartographer.model.objects.*
 
 data class Level(
     val author: String,
     val background: Background,
     val maxPlayers: Int,
-    val volume: Volume,
+    val size: Size,
     val sensorsManagerCameraDistances: Constraint<Double>,
     val defaultMusic: Music,
     val battleMusic: Music,
