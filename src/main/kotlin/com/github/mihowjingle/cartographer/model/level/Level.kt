@@ -1,7 +1,7 @@
 package com.github.mihowjingle.cartographer.model.level
 
 import com.github.mihowjingle.cartographer.model.common.Constraint
-import com.github.mihowjingle.cartographer.model.objects.*
+import com.github.mihowjingle.cartographer.model.entities.*
 
 data class Level(
     val author: String?, // i mean... shouldn't you be proud of your creation? but ok
@@ -12,8 +12,6 @@ data class Level(
     val defaultMusic: Music,
     val battleMusic: Music,
     val fog: Fog,
-
-    // map objects... level entities... something
     val pebbles: List<Pebble>,
     val asteroids: List<Asteroid>,
     val startingPositions: List<StartingPosition>,

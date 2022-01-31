@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Orientation
 import com.github.mihowjingle.cartographer.model.common.Position

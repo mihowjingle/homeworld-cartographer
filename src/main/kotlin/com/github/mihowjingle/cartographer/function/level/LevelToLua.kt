@@ -1,7 +1,7 @@
 package com.github.mihowjingle.cartographer.function.level
 
+import com.github.mihowjingle.cartographer.model.entities.LevelEntity
 import com.github.mihowjingle.cartographer.model.level.Level
-import com.github.mihowjingle.cartographer.model.objects.Entity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -53,16 +53,16 @@ fun Level.appendFog(sb: StringBuilder) {
 
 private val now get() = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
 
-private fun StringBuilder.optionallyAppendChunk(entities: List<Entity>) {
+private fun StringBuilder.optionallyAppendChunk(entities: List<LevelEntity>) {
     if (entities.isNotEmpty()) {
         appendLine(chunk(entities))
     }
 }
 
-private fun chunk(entities: Iterable<Entity>): String {
+private fun chunk(entities: Iterable<LevelEntity>): String {
     val sb = StringBuilder("")
-    for (e in entities) {
-        sb.append("    " + e.toLua() + "\n")
+    for (entity in entities) {
+        sb.append("    " + entity.toLua() + "\n")
     }
     return sb.toString()
 }

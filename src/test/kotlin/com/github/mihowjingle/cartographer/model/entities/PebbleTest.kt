@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Position
 import io.kotest.core.spec.style.FunSpec

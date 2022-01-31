@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Position
@@ -10,7 +10,7 @@ data class Nebula(
     val color: Color,
     val initialRotationDegrees: Double, // probably
     val size: Double
-) : Entity {
+) : LevelEntity {
     enum class Type(val label: String) {
         NEBULA_M07_FOUNDRY_RADIATION("M07_Foundry_Radiation"), // a bit ugly but ok (weird reaction to light)
         NEBULA_M08_NO_DAMAGE_RADIATION("M08_NoDamage_Radiation"), // a bit ugly but ok (weird reaction to light)

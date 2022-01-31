@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Position
@@ -11,7 +11,7 @@ data class Cloud(
     val color: Color,
     val initialRotationDegrees: Double, // probably
     val size: Double
-) : Entity {
+) : LevelEntity {
     enum class Type(val label: String) {
         DC_0("Cloud_0"),
         DC_NO_RES("Cloud_NoRes"),

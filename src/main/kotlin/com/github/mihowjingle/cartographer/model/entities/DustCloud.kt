@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Position
@@ -10,7 +10,7 @@ data class DustCloud(
     val color: Color,
     val initialRotationDegrees: Double, // probably
     val size: Double
-) : Entity {
+) : LevelEntity {
     enum class Type(val label: String) {
         DC_0("DustCloud_0"),
         DC_NO_RES("DustCloud_NoRes"),

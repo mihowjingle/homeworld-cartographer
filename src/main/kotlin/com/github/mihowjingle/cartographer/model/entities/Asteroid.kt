@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Orientation
 import com.github.mihowjingle.cartographer.model.common.Position
@@ -11,7 +11,7 @@ data class Asteroid(
     val position: Position,
     val percentOfDefaultRus: Double,
     val initialOrientation: Orientation = Orientation.random()
-) : Entity {
+) : LevelEntity {
     enum class Type(val label: String, val defaultRus: Int, val maxSupportedCollectors: Int) {
 
         // found in existing HW2 maps

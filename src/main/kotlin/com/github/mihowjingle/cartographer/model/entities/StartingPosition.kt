@@ -1,11 +1,11 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Position
 
 /**
  * Player index can be 0..7
  */
-data class StartingPosition(val playerIndex: Int, val position: Position, val zAxisOrientation: Double) : Entity {
+data class StartingPosition(val playerIndex: Int, val position: Position, val zAxisOrientation: Double) : LevelEntity {
 
     init {
         if (playerIndex !in 0..7) {

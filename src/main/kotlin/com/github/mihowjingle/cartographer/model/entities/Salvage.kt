@@ -1,10 +1,10 @@
-package com.github.mihowjingle.cartographer.model.objects
+package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Position
 
 // todo, for salvage and asteroids, introduce constructor (or setter, i'm probably making these mutable)
 //  with desired effective RUs and then calculate what % it should be
-data class Salvage(val type: Type, val position: Position, val percentOfDefaultRus: Double) : Entity {
+data class Salvage(val type: Type, val position: Position, val percentOfDefaultRus: Double) : LevelEntity {
     enum class Type(val label: String) {
         SALVAGE_SMALL_01("Slv_Chunk_Sml01"),
         SALVAGE_SMALL_02("Slv_Chunk_Sml02"),

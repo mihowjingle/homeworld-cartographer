@@ -1,6 +1,6 @@
 package com.github.mihowjingle.cartographer.ui.views
 
-import com.github.mihowjingle.cartographer.model.objects.Pebble
+import com.github.mihowjingle.cartographer.model.entities.Pebble
 import javafx.scene.control.TableView
 import tornadofx.*
 

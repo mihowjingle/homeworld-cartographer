@@ -3,10 +3,10 @@ package com.github.mihowjingle.cartographer.ui.views
 import com.github.mihowjingle.cartographer.model.common.Constraint
 import com.github.mihowjingle.cartographer.model.common.Position
 import com.github.mihowjingle.cartographer.model.level.*
-import com.github.mihowjingle.cartographer.model.objects.Asteroid
-import com.github.mihowjingle.cartographer.model.objects.Pebble
-import com.github.mihowjingle.cartographer.model.objects.Salvage
-import com.github.mihowjingle.cartographer.model.objects.StartingPosition
+import com.github.mihowjingle.cartographer.model.entities.Asteroid
+import com.github.mihowjingle.cartographer.model.entities.Pebble
+import com.github.mihowjingle.cartographer.model.entities.Salvage
+import com.github.mihowjingle.cartographer.model.entities.StartingPosition
 import tornadofx.*
 import kotlin.random.Random
 
