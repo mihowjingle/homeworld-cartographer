@@ -5,6 +5,7 @@ import com.github.mihowjingle.cartographer.model.entities.*
 
 data class Level(
     val author: String?, // i mean... shouldn't you be proud of your creation? but ok
+    val name: String,
     val background: Background,
     val maxPlayers: Int,
     val size: Size,

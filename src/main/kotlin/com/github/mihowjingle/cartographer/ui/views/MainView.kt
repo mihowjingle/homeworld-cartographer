@@ -2,16 +2,17 @@ package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.model.common.Constraint
 import com.github.mihowjingle.cartographer.model.common.Position
-import com.github.mihowjingle.cartographer.model.level.*
 import com.github.mihowjingle.cartographer.model.entities.Asteroid
 import com.github.mihowjingle.cartographer.model.entities.Pebble
 import com.github.mihowjingle.cartographer.model.entities.Salvage
 import com.github.mihowjingle.cartographer.model.entities.StartingPosition
+import com.github.mihowjingle.cartographer.model.level.*
 import tornadofx.*
 import kotlin.random.Random
 
 val testLevel = Level(
     author =                        "Arthur Authorsson",
+    name =                          "Cartography",
     background =                    Background.HW2_14,
     maxPlayers =                    3,
     size =                          Size(120000.0, 100000.0, 120000.0),

@@ -11,6 +11,8 @@ fun Level.toLua() = with(StringBuilder()) {
     appendLine("-- Created/last edited in Homeworld Cartographer on $now")
     if (author != null) appendLine("-- by yours truly, $author")
     appendLine()
+    appendLine("levelDesc = \"$name\"")
+    appendLine()
     appendLine("function DetermChunk()")
     optionallyAppendChunk(startingPositions)
     optionallyAppendChunk(asteroids)
