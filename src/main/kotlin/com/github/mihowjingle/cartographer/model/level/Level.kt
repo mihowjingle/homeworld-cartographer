@@ -1,11 +1,10 @@
 package com.github.mihowjingle.cartographer.model.level
 
-import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.common.Constraint
 import com.github.mihowjingle.cartographer.model.objects.*
 
 data class Level(
-    val author: String,
+    val author: String?, // i mean... shouldn't you be proud of your creation? but ok
     val background: Background,
     val maxPlayers: Int,
     val size: Size,
@@ -22,15 +21,7 @@ data class Level(
     val dustClouds: List<DustCloud>,
     val nebulae: List<Nebula>,
     val salvage: List<Salvage>,
-    val megaliths: List<Megalith>,
-
-    // ?? only even seen 0.000000, 0.000000, 0.000000, 1.0 and sometimes even not at all in file,
-    // after brief testing, no apparent change
-    val shadowColor: Color = Color(0, 0, 0, 255),
-
-    // ?? only ever seen 0.000000 and sometimes even not at all in file,
-    // after brief testing, no apparent change
-    val glareIntensity: Double = 0.0
+    val megaliths: List<Megalith>
 ) {
     init {
         if (maxPlayers !in 2..8) { // actually maybe 1 player too? but would that be interesting anyway?

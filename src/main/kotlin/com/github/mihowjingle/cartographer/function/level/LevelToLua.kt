@@ -5,9 +5,11 @@ import com.github.mihowjingle.cartographer.model.objects.Entity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+// shadow color and glare intensity?? only ever seen 0,0,0,1 / 0 respectively, and sometimes even not at all in file,
+// after brief testing, no apparent change
 fun Level.toLua() = with(StringBuilder()) {
     appendLine("-- Created/last edited in Homeworld Cartographer on $now")
-    appendLine("-- by yours truly, $author")
+    if (author != null) appendLine("-- by yours truly, $author")
     appendLine()
     appendLine("function DetermChunk()")
     optionallyAppendChunk(startingPositions)
@@ -23,8 +25,8 @@ fun Level.toLua() = with(StringBuilder()) {
     appendLine("function NonDetermChunk()")
     optionallyAppendChunk(pebbles)
     appendFog(this)
-    appendLine("    setGlareIntensity($glareIntensity)")
-    appendLine("    setLevelShadowColour(${shadowColor.r}, ${shadowColor.g}, ${shadowColor.b}, ${shadowColor.a})")
+    appendLine("    setGlareIntensity(0.0)")
+    appendLine("    setLevelShadowColour(0.0, 0.0, 0.0, 1.0)")
     appendLine("    loadBackground(\"${background.label}\")")
     appendLine("    setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})")
     appendLine("    setDefaultMusic(\"${defaultMusic.path}\")")
