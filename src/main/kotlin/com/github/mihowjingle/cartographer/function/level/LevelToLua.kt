@@ -44,7 +44,7 @@ fun Level.appendFog(sb: StringBuilder) {
         sb.appendLine("    fogSetStart(${fog.start})")
         sb.appendLine("    fogSetEnd(${fog.end})")
         sb.appendLine("    fogSetColour(${fog.color.r}, ${fog.color.g}, ${fog.color.b}, ${fog.color.a})")
-        sb.appendLine("    fogSetType(\"linear\")")
+        sb.appendLine("    fogSetType(\"${fog.type.label}\")")
         sb.appendLine("    fogSetDensity(${fog.density})")
     } else {
         sb.appendLine("    fogSetActive(0)")
