@@ -21,7 +21,7 @@ fun Level.toLua() = with(StringBuilder()) {
     optionallyAppendChunk(nebulae)
     optionallyAppendChunk(salvage)
     optionallyAppendChunk(megaliths)
-    appendLine("    setWorldBoundsInner({0.00, 0.00, 0.00}, {${size.x}, ${size.z}, ${size.y}})")
+    appendLine("    setWorldBoundsInner({0.0, 0.0, 0.0}, {${size.x}, ${size.z}, ${size.y}})")
     appendLine("end")
     appendLine()
     appendLine("function NonDetermChunk()")

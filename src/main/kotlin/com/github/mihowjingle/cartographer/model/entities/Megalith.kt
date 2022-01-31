@@ -7,7 +7,7 @@ data class Megalith(
     val name: String,
     val type: Type,
     val position: Position,
-    val ownerPlayerIndex: Int,
+    val ownerPlayerIndex: Int = -1, // -1 is no owner
     val orientation: Orientation
 ) : LevelEntity {
 
