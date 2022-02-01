@@ -60,6 +60,7 @@ class MainView : View("Homeworld Cartographer") {
             }
             menu("Clean up") {
                 item("Delete out-of-bounds objects")
+                item("Delete duplicated (or even just colliding?) objects")
                 item("... and so on")
             }
             menu("Examine") {
