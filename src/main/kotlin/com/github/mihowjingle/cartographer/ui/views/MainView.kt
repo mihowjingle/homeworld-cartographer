@@ -82,7 +82,7 @@ class MainView : View("Homeworld Cartographer") {
                     item("Fog")
                     item("Music")
                 }
-                item("About") // show "about" modal
+                item("About")
             }
         }
         vbox {
