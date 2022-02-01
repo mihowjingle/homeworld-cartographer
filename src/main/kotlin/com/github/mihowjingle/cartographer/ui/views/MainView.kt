@@ -65,6 +65,8 @@ class MainView : View("Homeworld Cartographer") {
             }
             menu("Examine") {
                 item("Count objects")
+                item("All kinds of diagnostics/reports")
+                item("Dunno")
                 item("... and so on")
             }
             menu("Help") {
@@ -86,11 +88,71 @@ class MainView : View("Homeworld Cartographer") {
                 item("About")
             }
         }
-        vbox {
-            style {
-                paddingAll = 10
+        hbox {
+            borderpane {
+                left = form {
+                    fieldset("Level") {
+                        field("Author") {
+                            textfield()
+                        }
+                        field("Name") {
+                            textfield()
+                        }
+                        field("Max players") {
+                            spinner<Int>()
+                        }
+                        field("Background") {
+                            combobox<String> {}
+                        }
+                        field("Default music") {
+                            combobox<String> {}
+                        }
+                        field("Battle music") {
+                            combobox<String> {}
+                        }
+                    }
+                    fieldset("Size") {
+                        field("X") {
+                            spinner<Double>()
+                        }
+                        field("Z") {
+                            spinner<Double>()
+                        }
+                        field("Y") {
+                            spinner<Double>()
+                        }
+                    }
+                    fieldset("Sensor manager camera distances") {
+                        field("Min") {
+                            spinner<Double>()
+                        }
+                        field("Max") {
+                            spinner<Double>()
+                        }
+                    }
+                    fieldset("Fog") {
+                        field("Active") {
+                            checkbox()
+                        }
+                        field("Type") {
+                            combobox<String> {}
+                        }
+                        field("Start") {
+                            spinner<Double>()
+                        }
+                        field("End") {
+                            spinner<Double>()
+                        }
+                        field("Color") {
+                            colorpicker()
+                        }
+                        field("Density") {
+                            spinner<Double>()
+                        }
+                    }
+                }
+                center = imageview("3dviewer.png")
             }
-            // todo 3d viewer here?
         }
     }
 }
