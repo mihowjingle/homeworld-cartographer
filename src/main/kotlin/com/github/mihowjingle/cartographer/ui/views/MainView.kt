@@ -30,7 +30,7 @@ class MainView : View("Homeworld Cartographer") {
                         Pebble(Pebble.Type.PEBBLE_0, Position(1.0, 2.0, 3.0)),
                         Pebble(Pebble.Type.PEBBLE_1, Position(11.0, 12.0, 13.0)),
                         Pebble(Pebble.Type.PEBBLE_2, Position(21.0, 22.0, 23.0))
-                    ))).openModal()
+                    ))).openWindow()
                 }
                 item("Salvage")
                 item("Starting positions")
