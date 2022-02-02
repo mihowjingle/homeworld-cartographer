@@ -23,7 +23,7 @@ class ObservableLevel(
     defaultMusic: Music? = null,
     battleMusic: Music? = null,
     val size: ObservableSize = ObservableSize(), // todo
-    val sensorsManagerCameraDistances: ObservableConstraint<Double>? = null, // todo
+    val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0), // todo
     val fog: Fog = Fog( // todo
         active = false,
         type = FogType.LINEAR,
@@ -54,7 +54,7 @@ class ObservableLevel(
     var name: String? by nameProperty
 
     val maxPlayersProperty = SimpleIntegerProperty(maxPlayers)
-    var maxPlayers: Int? by maxPlayersProperty
+    var maxPlayers: Int by maxPlayersProperty
 
     val backgroundProperty = SimpleObjectProperty(background)
     var background: Background? by backgroundProperty

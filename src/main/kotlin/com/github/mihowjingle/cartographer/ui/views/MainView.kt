@@ -11,7 +11,6 @@ import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
 import javafx.geometry.Insets
-import javafx.scene.control.SpinnerValueFactory
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
@@ -146,15 +145,41 @@ class MainView : View("Homeworld Cartographer") {
                 }
                 fieldset("Size") {
                     field("X") {
-                        spinner<Double> {
-                            valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, Double.MAX_VALUE, 0.0, 0.0001)
+                        // todo oof, this stinks, but spinner is broken with Double (unless editable = false, but cmon...)
+                        textfield(value = controller.currentLevel.size.x.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.size.x = this.text.toDouble()
+                                }
+                            }
                         }
                     }
                     field("Z") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.size.z.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.size.z = this.text.toDouble()
+                                }
+                            }
+                        }
                     }
                     field("Y") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.size.y.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.size.y = this.text.toDouble()
+                                }
+                            }
+                        }
                     }
                 }
                 fieldset("Sensor manager camera distances") {
