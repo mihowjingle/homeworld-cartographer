@@ -1,8 +1,15 @@
 package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.model.common.Position
+import com.github.mihowjingle.cartographer.model.dictionaries.Background
+import com.github.mihowjingle.cartographer.model.dictionaries.FogType
+import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.model.entities.Pebble
+import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
+import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
+import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
+import javafx.scene.control.SpinnerValueFactory
 import tornadofx.*
 import kotlin.system.exitProcess
 
@@ -89,71 +96,89 @@ class MainView : View("Homeworld Cartographer") {
                 item("About")
             }
         }
-        hbox {
-            borderpane {
-                left = form {
-                    fieldset("Level") {
-                        field("Author") {
-                            textfield()
-                        }
-                        field("Name") {
-                            textfield()
-                        }
-                        field("Max players") {
-                            spinner<Int>()
-                        }
-                        field("Background") {
-                            combobox<String> {}
-                        }
-                        field("Default music") {
-                            combobox<String> {}
-                        }
-                        field("Battle music") {
-                            combobox<String> {}
+        borderpane {
+            left = form {
+                fieldset("Level") {
+                    field("Author") {
+                        textfield()
+                    }
+                    field("Name") {
+                        textfield()
+                    }
+                    field("Max players") {
+                        spinner<Int>()
+                    }
+                    field("Background") {
+                        combobox<Background> {
+                            maxWidth = Double.MAX_VALUE
+                            items = Background.values().toList().toObservable()
+                            converter = BackgroundConverter
                         }
                     }
-                    fieldset("Size") {
-                        field("X") {
-                            spinner<Double>()
-                        }
-                        field("Z") {
-                            spinner<Double>()
-                        }
-                        field("Y") {
-                            spinner<Double>()
+                    field("Default music") {
+                        combobox<Music> {
+                            maxWidth = Double.MAX_VALUE
+                            items = Music.values().toList().toObservable()
+                            converter = MusicConverter
                         }
                     }
-                    fieldset("Sensor manager camera distances") {
-                        field("Min") {
-                            spinner<Double>()
-                        }
-                        field("Max") {
-                            spinner<Double>()
-                        }
-                    }
-                    fieldset("Fog") {
-                        field("Active") {
-                            checkbox()
-                        }
-                        field("Type") {
-                            combobox<String> {}
-                        }
-                        field("Start") {
-                            spinner<Double>()
-                        }
-                        field("End") {
-                            spinner<Double>()
-                        }
-                        field("Color") {
-                            colorpicker()
-                        }
-                        field("Density") {
-                            spinner<Double>()
+                    field("Battle music") {
+                        combobox<Music> {
+                            maxWidth = Double.MAX_VALUE
+                            items = Music.values().toList().toObservable()
+                            converter = MusicConverter
                         }
                     }
                 }
-                center = imageview("3dviewer.png")
+                fieldset("Size") {
+                    field("X") {
+                        spinner<Double> {
+                            valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, Double.MAX_VALUE, 0.0, 0.0001)
+                        }
+                    }
+                    field("Z") {
+                        spinner<Double>()
+                    }
+                    field("Y") {
+                        spinner<Double>()
+                    }
+                }
+                fieldset("Sensor manager camera distances") {
+                    field("Min") {
+                        spinner<Double>()
+                    }
+                    field("Max") {
+                        spinner<Double>()
+                    }
+                }
+                fieldset("Fog") {
+                    field("Active") {
+                        checkbox()
+                    }
+                    field("Type") {
+                        combobox<FogType> {
+                            maxWidth = Double.MAX_VALUE
+                            items = FogType.values().toList().toObservable()
+                            converter = FogTypeConverter
+                        }
+                    }
+                    field("Start") {
+                        spinner<Double>()
+                    }
+                    field("End") {
+                        spinner<Double>()
+                    }
+                    field("Color") {
+                        colorpicker {
+                            maxWidth = Double.MAX_VALUE
+                        }
+                    }
+                    field("Density") {
+                        spinner<Double>()
+                    }
+                }
             }
+            center = imageview("3dviewer.png")
         }
     }
 }

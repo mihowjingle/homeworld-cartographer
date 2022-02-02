@@ -1,6 +1,6 @@
 package com.github.mihowjingle.cartographer.model.dictionaries
 
-enum class Music(pathSuffix: String, val description: String) : Dictionary {
+enum class Music(code: String, val description: String) : Dictionary {
     HW1_AMBIENT_00("ambient/tutorial", "HW1 Tutorial"),
     HW1_AMBIENT_01("ambient/a01_mission1", "Kharak Ambient"),
     HW1_AMBIENT_02("ambient/a02_mission2and4", "Kharak Outskirts / Great Wastelands"),
@@ -28,7 +28,7 @@ enum class Music(pathSuffix: String, val description: String) : Dictionary {
     STAGING_04("staging/staging_04", "Hyperspace Inhibitors"),
     STAGING_05("staging/staging_05", "Gehenna Staging"),
     STAGING_08("staging/staging_08", "Dreadnaught"),
-    STAGING_11("staging/staging_11", "Bentusi! ;_;"),
+    STAGING_11("staging/staging_11", "Bentusi! ; _ ;"),
     HW1_BATTLE_01("battle/b01_turanicraiderslong", "Turanic Raiders Battle"),
     HW1_BATTLE_02("battle/b03_swarmers", "Swarmers Battle"),
     HW1_BATTLE_03("battle/b04_evilempire", "Evil Empire Battle"),
@@ -42,6 +42,6 @@ enum class Music(pathSuffix: String, val description: String) : Dictionary {
     HW2_BATTLE_SAJUUK("battle/battle_sajuuk", "Battle For Sajuuk"),
     HW2_BENTUS_ARRIVAL("battle/bentus_arrival", "Bentus Arrives (HW2, Sarum)");
 
-    override val label = "$pathSuffix: $description"
-    val path = "data:sound/music/$pathSuffix"
+    override val label = "$code: $description"
+    val path = "data:sound/music/$code"
 }
