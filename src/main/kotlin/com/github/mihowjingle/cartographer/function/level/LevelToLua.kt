@@ -29,7 +29,7 @@ fun Level.toLua() = with(StringBuilder()) {
     appendFog(this)
     appendLine("    setGlareIntensity(0.0)")
     appendLine("    setLevelShadowColour(0.0, 0.0, 0.0, 1.0)")
-    appendLine("    loadBackground(\"${background.label}\")")
+    appendLine("    loadBackground(\"${background.code}\")")
     appendLine("    setSensorsManagerCameraDistances(${sensorsManagerCameraDistances.min}, ${sensorsManagerCameraDistances.max})")
     appendLine("    setDefaultMusic(\"${defaultMusic.path}\")")
     appendLine("    setBattleMusic(\"${battleMusic.path}\")")

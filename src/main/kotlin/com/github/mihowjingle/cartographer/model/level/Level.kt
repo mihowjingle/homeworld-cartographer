@@ -1,6 +1,8 @@
 package com.github.mihowjingle.cartographer.model.level
 
 import com.github.mihowjingle.cartographer.model.common.Constraint
+import com.github.mihowjingle.cartographer.model.dictionaries.Background
+import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
 
 data class Level(

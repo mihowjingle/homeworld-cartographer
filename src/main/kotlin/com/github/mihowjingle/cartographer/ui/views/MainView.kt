@@ -1,6 +1,7 @@
 package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.model.common.Position
+import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.model.entities.Pebble
 import tornadofx.*
 import kotlin.system.exitProcess
@@ -27,9 +28,9 @@ class MainView : View("Homeworld Cartographer") {
                 item("Nebulae")
                 item("Pebbles! :)").action {
                     find<PebblesModal>(mapOf(PebblesModal::pebbles to listOf(
-                        Pebble(Pebble.Type.PEBBLE_0, Position(1.0, 2.0, 3.0)),
-                        Pebble(Pebble.Type.PEBBLE_1, Position(11.0, 12.0, 13.0)),
-                        Pebble(Pebble.Type.PEBBLE_2, Position(21.0, 22.0, 23.0))
+                        Pebble(PebbleType.PEBBLE_0, Position(1.0, 2.0, 3.0)),
+                        Pebble(PebbleType.PEBBLE_1, Position(11.0, 12.0, 13.0)),
+                        Pebble(PebbleType.PEBBLE_2, Position(21.0, 22.0, 23.0))
                     ))).openWindow()
                 }
                 item("Salvage")

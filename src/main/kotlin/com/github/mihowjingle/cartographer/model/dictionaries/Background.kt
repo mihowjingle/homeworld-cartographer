@@ -1,6 +1,6 @@
-package com.github.mihowjingle.cartographer.model.level
+package com.github.mihowjingle.cartographer.model.dictionaries
 
-enum class Background(val label: String, val description: String) {
+enum class Background(val code: String, val description: String) : Dictionary {
     HW1_01("ez01", "Kharak"), // ez03 the same
     HW1_02("ez02", "Kharak System Outskirts"),
     HW1_04("ez04", "Great Wastelands (HW1)"),
@@ -30,8 +30,8 @@ enum class Background(val label: String, val description: String) {
     HW2_13("m13", "Balcora Gate"),
     HW2_14("m14", "Balcora"),
     HW2_15("m15", "Hiigara (HW2)"),
-    BLACK("black", "unfinished, pretty cool, lower quality, light doesn't light up ships");
+    BLACK("black", "unfinished, lower quality, no light fx");
 
-    val dropdownLabel = "$label: $description"
-    val thumbnailPath = "resources/backgrounds/$label.jpg"
+    override val label = "$code: $description"
+    val thumbnailPath = "resources/backgrounds/$code.jpg"
 }

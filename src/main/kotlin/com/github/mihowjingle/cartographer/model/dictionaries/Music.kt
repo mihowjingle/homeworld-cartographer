@@ -1,6 +1,6 @@
-package com.github.mihowjingle.cartographer.model.level
+package com.github.mihowjingle.cartographer.model.dictionaries
 
-enum class Music(pathSuffix: String, val description: String) {
+enum class Music(pathSuffix: String, val description: String) : Dictionary {
     HW1_AMBIENT_00("ambient/tutorial", "HW1 Tutorial"),
     HW1_AMBIENT_01("ambient/a01_mission1", "Kharak Ambient"),
     HW1_AMBIENT_02("ambient/a02_mission2and4", "Kharak Outskirts / Great Wastelands"),
@@ -42,5 +42,6 @@ enum class Music(pathSuffix: String, val description: String) {
     HW2_BATTLE_SAJUUK("battle/battle_sajuuk", "Battle For Sajuuk"),
     HW2_BENTUS_ARRIVAL("battle/bentus_arrival", "Bentus Arrives (HW2, Sarum)");
 
+    override val label = "$pathSuffix: $description"
     val path = "data:sound/music/$pathSuffix"
 }

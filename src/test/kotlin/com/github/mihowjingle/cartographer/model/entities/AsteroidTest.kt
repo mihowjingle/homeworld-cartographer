@@ -2,13 +2,14 @@ package com.github.mihowjingle.cartographer.model.entities
 
 import com.github.mihowjingle.cartographer.model.common.Orientation
 import com.github.mihowjingle.cartographer.model.common.Position
+import com.github.mihowjingle.cartographer.model.dictionaries.AsteroidType
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 class AsteroidTest : FunSpec({
 
-    val asteroid1 = Asteroid(Asteroid.Type.ASTEROID_3, Position(1.0, 2.0, 3.0), 110.0, Orientation(0.0, 0.1, 0.4))
-    val asteroid2 = Asteroid(Asteroid.Type.ASTEROID2_MP, Position(6.0, 5.0, 4.0), 50.0, Orientation(-0.5, -10.0, 20.0))
+    val asteroid1 = Asteroid(AsteroidType.ASTEROID_3, Position(1.0, 2.0, 3.0), 110.0, Orientation(0.0, 0.1, 0.4))
+    val asteroid2 = Asteroid(AsteroidType.ASTEROID2_MP, Position(6.0, 5.0, 4.0), 50.0, Orientation(-0.5, -10.0, 20.0))
 
     test("an asteroid should return the correct amount of actual RUs") {
         asteroid1.effectiveRus shouldBe 9900
