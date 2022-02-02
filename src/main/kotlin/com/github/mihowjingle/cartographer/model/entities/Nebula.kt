@@ -14,5 +14,5 @@ data class Nebula(
 ) : LevelEntity {
 
     override fun toLua() = "addNebula(\"$name\", \"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, " +
-            "{${color.r}, ${color.g}, ${color.b}, ${color.a}}, $initialRotationDegrees, $size)"
+            "{${color.red}, ${color.green}, ${color.blue}, ${color.alpha}}, $initialRotationDegrees, $size)"
 }

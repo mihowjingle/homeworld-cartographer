@@ -15,5 +15,5 @@ data class Cloud(
 ) : LevelEntity {
 
     override fun toLua() =
-        "addCloud(\"$name\", \"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, {${color.r}, ${color.g}, ${color.b}, ${color.a}}, $initialRotationDegrees, $size)"
+        "addCloud(\"$name\", \"${type.label}\", {${position.x}, ${position.z}, ${position.y}}, {${color.red}, ${color.green}, ${color.blue}, ${color.alpha}}, $initialRotationDegrees, $size)"
 }

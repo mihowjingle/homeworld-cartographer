@@ -12,7 +12,7 @@ class NebulaTest : FunSpec({
         "Natalie",
         NebulaType.NEBULA_MP_BENTUSI_RADIATION,
         Position(0.0, 3.0, 7.0),
-        Color(255, 0, 0, 255),
+        Color(1.0, 0.0, 0.0, 1.0),
         123.0,
         321.0
     )
