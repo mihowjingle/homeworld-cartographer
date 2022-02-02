@@ -10,8 +10,8 @@ class HomeworldCartographer : App(MainView::class) {
         with(stage) {
             minWidth = 800.0
             width = 1600.0
-            minHeight = 600.0
-            height = 900.0
+//            minHeight = 600.0
+//            height = 900.0
             super.start(this)
         }
     }

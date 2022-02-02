@@ -9,9 +9,14 @@ import com.github.mihowjingle.cartographer.model.entities.Pebble
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
+import javafx.geometry.Insets
 import javafx.scene.control.SpinnerValueFactory
+import javafx.scene.layout.BackgroundFill
+import javafx.scene.layout.CornerRadii
+import javafx.scene.paint.Color
 import tornadofx.*
 import kotlin.system.exitProcess
+import javafx.scene.layout.Background as FXBackground
 
 class MainView : View("Homeworld Cartographer") {
     override val root = vbox {
@@ -98,6 +103,7 @@ class MainView : View("Homeworld Cartographer") {
         }
         borderpane {
             left = form {
+                maxWidth = 400.0
                 fieldset("Level") {
                     field("Author") {
                         textfield()
@@ -178,7 +184,10 @@ class MainView : View("Homeworld Cartographer") {
                     }
                 }
             }
-            center = imageview("3dviewer.png")
+            center = pane {
+                background = FXBackground(BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY))
+                imageview("3dviewer.png")
+            }
         }
     }
 }
