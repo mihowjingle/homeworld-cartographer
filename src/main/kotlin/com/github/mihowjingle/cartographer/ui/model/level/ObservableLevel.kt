@@ -22,8 +22,8 @@ class ObservableLevel(
     background: Background? = null,
     defaultMusic: Music? = null,
     battleMusic: Music? = null,
-    val size: ObservableSize = ObservableSize(), // todo
-    val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0), // todo
+    val size: ObservableSize = ObservableSize(),
+    val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0),
     val fog: Fog = Fog( // todo
         active = false,
         type = FogType.LINEAR,

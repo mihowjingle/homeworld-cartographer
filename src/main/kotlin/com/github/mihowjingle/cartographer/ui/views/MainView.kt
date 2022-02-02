@@ -184,10 +184,28 @@ class MainView : View("Homeworld Cartographer") {
                 }
                 fieldset("Sensor manager camera distances") {
                     field("Min") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.sensorsManagerCameraDistances.min.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.sensorsManagerCameraDistances.min = this.text.toDouble()
+                                }
+                            }
+                        }
                     }
                     field("Max") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.sensorsManagerCameraDistances.max.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.sensorsManagerCameraDistances.max = this.text.toDouble()
+                                }
+                            }
+                        }
                     }
                 }
                 fieldset("Fog") {
