@@ -1,11 +1,8 @@
 package com.github.mihowjingle.cartographer.ui.model.level
 
-import com.github.mihowjingle.cartographer.model.common.Color
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
-import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
-import com.github.mihowjingle.cartographer.model.level.Fog
 import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
@@ -24,14 +21,7 @@ class ObservableLevel(
     battleMusic: Music? = null,
     val size: ObservableSize = ObservableSize(),
     val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0),
-    val fog: Fog = Fog( // todo
-        active = false,
-        type = FogType.LINEAR,
-        start = 0.0,
-        end = 0.0,
-        color = Color(255, 255, 255, 255),
-        density = 0.0
-    ),
+    val fog: ObservableFog = ObservableFog(),
     val pebbles: ObservableList<Pebble> = observableListOf(),
     val asteroids: ObservableList<Asteroid> = observableListOf(),
     val startingPositions: ObservableList<StartingPosition> = observableListOf(),

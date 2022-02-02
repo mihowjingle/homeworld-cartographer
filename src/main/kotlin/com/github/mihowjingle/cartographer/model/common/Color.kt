@@ -1,5 +1,7 @@
 package com.github.mihowjingle.cartographer.model.common
 
+// looks like 0..255 is too logical
+// javafx's Color is 0.0..1.0 too, todo adapt or resign from this completely
 data class Color(val red: Int, val green: Int, val blue: Int, val alpha: Int) {
 
     /**

@@ -210,28 +210,70 @@ class MainView : View("Homeworld Cartographer") {
                 }
                 fieldset("Fog") {
                     field("Active") {
-                        checkbox()
+                        checkbox(property = controller.currentLevel.fog.activeProperty)
                     }
                     field("Type") {
-                        combobox<FogType> {
+                        combobox(controller.currentLevel.fog.typeProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = FogType.values().toList().toObservable()
                             converter = FogTypeConverter
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
                         }
                     }
                     field("Start") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.fog.start.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.fog.start = this.text.toDouble()
+                                }
+                            }
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
+                        }
                     }
                     field("End") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.fog.end.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.fog.end = this.text.toDouble()
+                                }
+                            }
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
+                        }
                     }
                     field("Color") {
-                        colorpicker {
+                        colorpicker(controller.currentLevel.fog.colorProperty) {
                             maxWidth = Double.MAX_VALUE
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
                         }
                     }
                     field("Density") {
-                        spinner<Double>()
+                        textfield(value = controller.currentLevel.fog.density.toString()) {
+                            filterInput {
+                                it.controlNewText.isDouble()
+                            }
+                            setOnKeyReleased {
+                                if (this.text.isNotBlank()) {
+                                    controller.currentLevel.fog.density = this.text.toDouble()
+                                }
+                            }
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
+                        }
                     }
                 }
             }
