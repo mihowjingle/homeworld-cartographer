@@ -55,8 +55,6 @@ class ObservableLevel(
     val battleMusicProperty = SimpleObjectProperty(battleMusic)
     var battleMusic: Music? by battleMusicProperty
 
-    //
-
     override fun toString(): String {
         return "ObservableLevel(author=$author, name=$name, background=$background, maxPlayers=$maxPlayers, defaultMusic=$defaultMusic, battleMusic=$battleMusic, size=$size, sensorsManagerCameraDistances=$sensorsManagerCameraDistances, fog=$fog, pebbles=$pebbles, asteroids=$asteroids, startingPositions=$startingPositions, clouds=$clouds, dustClouds=$dustClouds, nebulae=$nebulae, salvage=$salvage, megaliths=$megaliths)"
     }

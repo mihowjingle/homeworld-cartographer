@@ -117,7 +117,7 @@ class MainView : View("Homeworld Cartographer") {
                         textfield(controller.currentLevel.nameProperty)
                     }
                     field("Max players") {
-                        spinner(min = 2, max = 8, amountToStepBy = 1, editable = true, property = controller.currentLevel.maxPlayersProperty) {
+                        spinner(min = 2, max = 8, amountToStepBy = 1, enableScroll = true, editable = true, property = controller.currentLevel.maxPlayersProperty) {
                             maxWidth = Double.MAX_VALUE
                         }
                     }
@@ -223,13 +223,13 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("Start") {
-                        textfield(value = controller.currentLevel.fog.start.toString()) {
+                        textfield(value = controller.currentLevel.fog.gradient.min.toString()) {
                             filterInput {
                                 it.controlNewText.isDouble()
                             }
                             setOnKeyReleased {
                                 if (this.text.isNotBlank()) {
-                                    controller.currentLevel.fog.start = this.text.toDouble()
+                                    controller.currentLevel.fog.gradient.min = this.text.toDouble()
                                 }
                             }
                             enableWhen {
@@ -238,13 +238,13 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("End") {
-                        textfield(value = controller.currentLevel.fog.end.toString()) {
+                        textfield(value = controller.currentLevel.fog.gradient.max.toString()) {
                             filterInput {
                                 it.controlNewText.isDouble()
                             }
                             setOnKeyReleased {
                                 if (this.text.isNotBlank()) {
-                                    controller.currentLevel.fog.end = this.text.toDouble()
+                                    controller.currentLevel.fog.gradient.max = this.text.toDouble()
                                 }
                             }
                             enableWhen {
