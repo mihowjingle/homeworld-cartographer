@@ -6,6 +6,7 @@ import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.model.entities.Pebble
+import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
@@ -19,6 +20,9 @@ import kotlin.system.exitProcess
 import javafx.scene.layout.Background as FXBackground
 
 class MainView : View("Homeworld Cartographer") {
+
+    private val controller: ApplicationController by inject()
+
     override val root = vbox {
         menubar { // just an example, up for radical change, probably
             menu("File") {
@@ -98,7 +102,9 @@ class MainView : View("Homeworld Cartographer") {
                     item("Fog")
                     item("Music")
                 }
-                item("About")
+                item("About").action {
+                    println(controller.currentLevel) // todo remove after testing
+                }
             }
         }
         borderpane {
@@ -106,30 +112,32 @@ class MainView : View("Homeworld Cartographer") {
                 maxWidth = 400.0
                 fieldset("Level") {
                     field("Author") {
-                        textfield()
+                        textfield(controller.currentLevel.authorProperty)
                     }
                     field("Name") {
-                        textfield()
+                        textfield(controller.currentLevel.nameProperty)
                     }
                     field("Max players") {
-                        spinner<Int>()
+                        spinner(min = 2, max = 8, amountToStepBy = 1, editable = true, property = controller.currentLevel.maxPlayersProperty) {
+                            maxWidth = Double.MAX_VALUE
+                        }
                     }
                     field("Background") {
-                        combobox<Background> {
+                        combobox(controller.currentLevel.backgroundProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = Background.values().toList().toObservable()
                             converter = BackgroundConverter
                         }
                     }
                     field("Default music") {
-                        combobox<Music> {
+                        combobox(controller.currentLevel.defaultMusicProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = Music.values().toList().toObservable()
                             converter = MusicConverter
                         }
                     }
                     field("Battle music") {
-                        combobox<Music> {
+                        combobox(controller.currentLevel.battleMusicProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = Music.values().toList().toObservable()
                             converter = MusicConverter
