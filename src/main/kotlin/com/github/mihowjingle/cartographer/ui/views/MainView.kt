@@ -10,11 +10,15 @@ import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
+import javafx.beans.value.ObservableValue
+import javafx.event.EventTarget
 import javafx.geometry.Insets
+import javafx.scene.control.TextField
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
 import tornadofx.*
+import kotlin.reflect.KMutableProperty0
 import kotlin.system.exitProcess
 import javafx.scene.layout.Background as FXBackground
 
@@ -72,6 +76,7 @@ class MainView : View("Homeworld Cartographer") {
                 item("Tilt whole level")
                 item("Scale whole level")
                 item("Randomize")
+                item("Orient all starting points towards center")
                 item("... and so on")
             }
             menu("Clean up") {
@@ -81,8 +86,8 @@ class MainView : View("Homeworld Cartographer") {
             }
             menu("Examine") {
                 item("Count objects")
+                item("How far starting positions are from each other, how un/fair it is")
                 item("All kinds of diagnostics/reports")
-                item("Dunno")
                 item("... and so on")
             }
             menu("Help") {
@@ -145,67 +150,21 @@ class MainView : View("Homeworld Cartographer") {
                 }
                 fieldset("Size") {
                     field("X") {
-                        // todo oof, this stinks, but spinner is broken with Double (unless editable = false, but cmon...)
-                        textfield(value = controller.currentLevel.size.x.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.size.x = this.text.toDouble()
-                                }
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.size::x)
                     }
                     field("Z") {
-                        textfield(value = controller.currentLevel.size.z.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.size.z = this.text.toDouble()
-                                }
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.size::z)
                     }
                     field("Y") {
-                        textfield(value = controller.currentLevel.size.y.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.size.y = this.text.toDouble()
-                                }
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.size::y)
                     }
                 }
                 fieldset("Sensor manager camera distances") {
                     field("Min") {
-                        textfield(value = controller.currentLevel.sensorsManagerCameraDistances.min.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.sensorsManagerCameraDistances.min = this.text.toDouble()
-                                }
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.sensorsManagerCameraDistances::min)
                     }
                     field("Max") {
-                        textfield(value = controller.currentLevel.sensorsManagerCameraDistances.max.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.sensorsManagerCameraDistances.max = this.text.toDouble()
-                                }
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.sensorsManagerCameraDistances::max)
                     }
                 }
                 fieldset("Fog") {
@@ -223,34 +182,10 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("Start") {
-                        textfield(value = controller.currentLevel.fog.gradient.min.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.fog.gradient.min = this.text.toDouble()
-                                }
-                            }
-                            enableWhen {
-                                controller.currentLevel.fog.activeProperty
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.fog.gradient::min, controller.currentLevel.fog.activeProperty)
                     }
                     field("End") {
-                        textfield(value = controller.currentLevel.fog.gradient.max.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.fog.gradient.max = this.text.toDouble()
-                                }
-                            }
-                            enableWhen {
-                                controller.currentLevel.fog.activeProperty
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.fog.gradient::max, controller.currentLevel.fog.activeProperty)
                     }
                     field("Color") {
                         colorpicker(controller.currentLevel.fog.colorProperty) {
@@ -261,25 +196,32 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("Density") {
-                        textfield(value = controller.currentLevel.fog.density.toString()) {
-                            filterInput {
-                                it.controlNewText.isDouble()
-                            }
-                            setOnKeyReleased {
-                                if (this.text.isNotBlank()) {
-                                    controller.currentLevel.fog.density = this.text.toDouble()
-                                }
-                            }
-                            enableWhen {
-                                controller.currentLevel.fog.activeProperty
-                            }
-                        }
+                        doubleInputWorkaround(controller.currentLevel.fog::density, controller.currentLevel.fog.activeProperty)
                     }
                 }
             }
             center = pane {
                 background = FXBackground(BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY))
                 imageview("3dviewer.png")
+            }
+        }
+    }
+}
+
+// todo oof, this stinks, but spinner is broken with Double (unless editable = false, but cmon...)
+fun EventTarget.doubleInputWorkaround(prop: KMutableProperty0<Double>, enabled: ObservableValue<Boolean>? = null, allowNegative: Boolean = false): TextField {
+    return textfield(value = prop.get().toString()) {
+        filterInput {
+            it.controlNewText.isDouble()
+        }
+        setOnKeyReleased {
+            if (this.text.isNotBlank()) {
+                prop.set(this.text.toDouble())
+            }
+        }
+        if (enabled != null ) {
+            enableWhen {
+                enabled
             }
         }
     }
