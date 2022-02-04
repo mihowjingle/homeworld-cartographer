@@ -50,7 +50,7 @@ fun String.canBecomeDouble(allowNegative: Boolean = false): Boolean {
     return try {
         this.toDouble()
         true
-    } catch (_ : Exception) {
+    } catch (_ : NumberFormatException) {
         false
     }
 }
