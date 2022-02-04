@@ -1,24 +1,17 @@
 package com.github.mihowjingle.cartographer.ui.views
 
-import com.github.mihowjingle.cartographer.model.common.Position
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
-import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
-import com.github.mihowjingle.cartographer.model.entities.Pebble
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
-import javafx.beans.value.ObservableValue
-import javafx.event.EventTarget
 import javafx.geometry.Insets
-import javafx.scene.control.TextField
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
 import tornadofx.*
-import kotlin.reflect.KMutableProperty0
 import kotlin.system.exitProcess
 import javafx.scene.layout.Background as FXBackground
 
@@ -45,12 +38,8 @@ class MainView : View("Homeworld Cartographer") {
                 item("Dust clouds")
                 item("Megaliths")
                 item("Nebulae")
-                item("Pebbles! :)").action {
-                    find<PebblesModal>(mapOf(PebblesModal::pebbles to listOf(
-                        Pebble(PebbleType.PEBBLE_0, Position(1.0, 2.0, 3.0)),
-                        Pebble(PebbleType.PEBBLE_1, Position(11.0, 12.0, 13.0)),
-                        Pebble(PebbleType.PEBBLE_2, Position(21.0, 22.0, 23.0))
-                    ))).openWindow()
+                item("Pebbles").action {
+                    find<PebblesTableView>().openWindow()
                 }
                 item("Salvage")
                 item("Starting positions")
@@ -63,7 +52,9 @@ class MainView : View("Homeworld Cartographer") {
                 item("Dust cloud")
                 item("Megalith")
                 item("Nebula")
-                item("Pebble")
+                item("Pebble").action {
+                    find<PebbleCreateView>().openModal()
+                }
                 item("Salvage")
                 item("Starting position")
             }
@@ -184,10 +175,10 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("Start") {
-                        doubleInputWorkaround(controller.currentLevel.fog.gradient::min, controller.currentLevel.fog.activeProperty)
+                        doubleInputWorkaround(controller.currentLevel.fog.gradient::min, enabled = controller.currentLevel.fog.activeProperty)
                     }
                     field("End") {
-                        doubleInputWorkaround(controller.currentLevel.fog.gradient::max, controller.currentLevel.fog.activeProperty)
+                        doubleInputWorkaround(controller.currentLevel.fog.gradient::max, enabled = controller.currentLevel.fog.activeProperty)
                     }
                     field("Color") {
                         colorpicker(controller.currentLevel.fog.colorProperty) {
@@ -198,32 +189,13 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("Density") {
-                        doubleInputWorkaround(controller.currentLevel.fog::density, controller.currentLevel.fog.activeProperty)
+                        doubleInputWorkaround(controller.currentLevel.fog::density, enabled = controller.currentLevel.fog.activeProperty)
                     }
                 }
             }
             center = pane {
                 background = FXBackground(BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY))
                 imageview("3dviewer.png")
-            }
-        }
-    }
-}
-
-// todo oof, this stinks, but spinner is broken with Double (unless editable = false, but cmon...)
-fun EventTarget.doubleInputWorkaround(prop: KMutableProperty0<Double>, enabled: ObservableValue<Boolean>? = null, allowNegative: Boolean = false): TextField {
-    return textfield(value = prop.get().toString()) {
-        filterInput {
-            it.controlNewText.isDouble()
-        }
-        setOnKeyReleased {
-            if (this.text.isNotBlank()) {
-                prop.set(this.text.toDouble())
-            }
-        }
-        if (enabled != null ) {
-            enableWhen {
-                enabled
             }
         }
     }

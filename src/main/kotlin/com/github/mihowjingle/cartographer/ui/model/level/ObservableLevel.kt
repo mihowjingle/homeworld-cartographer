@@ -4,6 +4,7 @@ import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
 import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
+import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
@@ -22,7 +23,7 @@ class ObservableLevel(
     val size: ObservableSize = ObservableSize(),
     val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0),
     val fog: ObservableFog = ObservableFog(),
-    val pebbles: ObservableList<Pebble> = observableListOf(),
+    val pebbles: ObservableList<ObservablePebble> = observableListOf(),
     val asteroids: ObservableList<Asteroid> = observableListOf(),
     val startingPositions: ObservableList<StartingPosition> = observableListOf(),
     val clouds: ObservableList<Cloud> = observableListOf(),
