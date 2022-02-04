@@ -73,10 +73,12 @@ class MainView : View("Homeworld Cartographer") {
                 item("... and so on")
             }
             menu("Manipulate") {
-                item("Tilt whole level")
+                item("Tilt whole level (x/y axis, with/without changing objects' rotations)") // todo maybe merge with "rotate"
+                item("Rotate whole level (around z axis)")
                 item("Scale whole level")
                 item("Randomize")
-                item("Orient all starting points towards center")
+                item("Orient all starting positions towards center")
+                item("Apply gravity (slightly condense groups of objects, dust clouds etc)")
                 item("... and so on")
             }
             menu("Clean up") {
