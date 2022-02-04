@@ -5,7 +5,6 @@ import javafx.event.EventTarget
 import javafx.scene.control.TextField
 import tornadofx.enableWhen
 import tornadofx.filterInput
-import tornadofx.isDouble
 import tornadofx.textfield
 import kotlin.reflect.KMutableProperty0
 
@@ -13,10 +12,10 @@ import kotlin.reflect.KMutableProperty0
 fun EventTarget.doubleInputWorkaround(prop: KMutableProperty0<Double>, initialValue: String = prop.get().toString(), enabled: ObservableValue<Boolean>? = null, allowNegative: Boolean = false): TextField {
     return textfield(value = initialValue) {
         filterInput {
-            it.controlNewText.isDouble()
+            it.controlNewText.canBecomeDouble(allowNegative)
         }
         setOnKeyReleased {
-            if (this.text.isNotBlank()) {
+            if (this.text.isNotBlank() && this.text != "-") {
                 prop.set(this.text.toDouble())
             }
         }
@@ -25,5 +24,33 @@ fun EventTarget.doubleInputWorkaround(prop: KMutableProperty0<Double>, initialVa
                 enabled
             }
         }
+    }
+}
+
+/**
+ * Returns true when and only when [this] String is a valid candidate for a Double value.
+ * Which is why, for example, "-" results in true (if [allowNegative] is true), because it can still be -1, -0.00089 or whatever,
+ * even though "-" is not a valid Double value itself.
+ * For the same reason, empty String is also ok - empty string can become any string after some keystrokes. Etc.
+ */
+fun String.canBecomeDouble(allowNegative: Boolean = false): Boolean {
+
+    if (this == "") {
+        return true
+    }
+
+    if (allowNegative && startsWith('-')) {
+        return count { it == '-' } == 1 && count { it == '.' } <= 1 && !contains("-.")
+    }
+
+    if (!allowNegative && startsWith('-')) {
+        return false
+    }
+
+    return try {
+        this.toDouble()
+        true
+    } catch (_ : Exception) {
+        false
     }
 }
