@@ -27,6 +27,8 @@ class CanBecomeDoubleTest : FunSpec({
         Case("-.",      ok = NO),
         Case("1.1.",    ok = NO),
         Case("1.1.1",   ok = NO),
+        Case("1.1g",    ok = NO),
+        Case("-0.554t", ok = NO),
     )
 
     val casesIfNegativeNotAllowed = listOf(
@@ -45,6 +47,8 @@ class CanBecomeDoubleTest : FunSpec({
         Case("-.",      ok = NO),
         Case("1.1.",    ok = NO),
         Case("1.1.1",   ok = NO),
+        Case("1.1g",    ok = NO),
+        Case("0.554t",  ok = NO),
     )
 
     context("string should (not) be a candidate for a Double value accordingly") {

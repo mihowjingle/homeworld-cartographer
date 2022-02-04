@@ -39,8 +39,8 @@ fun String.canBecomeDouble(allowNegative: Boolean = false): Boolean {
         return true
     }
 
-    if (allowNegative && startsWith('-')) {
-        return count { it == '-' } == 1 && count { it == '.' } <= 1 && !contains("-.")
+    if (allowNegative && this == "-") {
+        return true
     }
 
     if (!allowNegative && startsWith('-')) {
