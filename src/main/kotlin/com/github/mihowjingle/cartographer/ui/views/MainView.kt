@@ -9,6 +9,7 @@ import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.geometry.Insets
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
@@ -22,13 +23,16 @@ class MainView : View("Homeworld Cartographer") {
     private val controller: ApplicationController by inject()
 
     override val root = vbox {
-        menubar { // just an example, up for radical change, probably
+        menubar {
             menu("File") {
                 item("New", "Ctrl+N")
-                item("Import", "Ctrl+I") // .level
-                item("Export", "Ctrl+E") // .level
-                item("Load", "Ctrl+L") // some kind of my own intermediate file type, with some extra metadata? maybe?
-                item("Save", "Ctrl+S") // some kind of my own intermediate file type, with some extra metadata? maybe?
+                item("Load", "Ctrl+L")
+                item("Save", "Ctrl+S") {
+                    action(controller::save)
+                    enableWhen {
+                        SimpleBooleanProperty(true) // todo valid
+                    }
+                }
                 separator()
                 item("Quit", "Ctrl+Q").action {
                     exitProcess(0)

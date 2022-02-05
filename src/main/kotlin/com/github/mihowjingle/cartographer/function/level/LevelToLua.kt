@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 // after brief testing, no apparent change
 fun Level.toLua() = with(StringBuilder()) {
     appendLine("-- Created/last edited in Homeworld Cartographer on $now")
-    if (author != null) appendLine("-- by yours truly, $author")
+    if (author != null && author.isNotBlank()) appendLine("-- by yours truly, $author")
     appendLine()
     appendLine("levelDesc = \"$name\"")
     appendLine()
@@ -42,11 +42,16 @@ fun Level.toLua() = with(StringBuilder()) {
 
 fun Level.appendFog(sb: StringBuilder) {
     if (fog.active) {
+        val red = fog.color?.red ?: error("Color should not be null at this point!")
+        val green = fog.color.green
+        val blue = fog.color.blue
+        val alpha = fog.color.alpha
+        val type = fog.type?.label ?: error("Fog type should not be null at this point!")
         sb.appendLine("    fogSetActive(1)")
         sb.appendLine("    fogSetStart(${fog.start})")
         sb.appendLine("    fogSetEnd(${fog.end})")
-        sb.appendLine("    fogSetColour(${fog.color.red}, ${fog.color.green}, ${fog.color.blue}, ${fog.color.alpha})")
-        sb.appendLine("    fogSetType(\"${fog.type.label}\")")
+        sb.appendLine("    fogSetColour($red, $green, $blue, $alpha)")
+        sb.appendLine("    fogSetType(\"$type\")")
         sb.appendLine("    fogSetDensity(${fog.density})")
     } else {
         sb.appendLine("    fogSetActive(0)")

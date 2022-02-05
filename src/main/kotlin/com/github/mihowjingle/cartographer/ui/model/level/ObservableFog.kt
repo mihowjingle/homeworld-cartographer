@@ -1,6 +1,7 @@
 package com.github.mihowjingle.cartographer.ui.model.level
 
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
+import com.github.mihowjingle.cartographer.model.level.Fog
 import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleDoubleProperty
@@ -8,6 +9,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.paint.Color
 import tornadofx.getValue
 import tornadofx.setValue
+import com.github.mihowjingle.cartographer.model.common.Color as PersistentColor
 
 class ObservableFog(
     active: Boolean = false,
@@ -37,5 +39,16 @@ class ObservableFog(
 
     override fun toString(): String {
         return "ObservableFog(active=$active, type=$type, gradient=$gradient, color=$color, density=$density)"
+    }
+
+    fun toPersistent(): Fog {
+        return Fog(
+            active = active,
+            type = type,
+            start = gradient.min,
+            end = gradient.max,
+            color = PersistentColor(color.red, color.green, color.blue, color.opacity),
+            density = density
+        )
     }
 }

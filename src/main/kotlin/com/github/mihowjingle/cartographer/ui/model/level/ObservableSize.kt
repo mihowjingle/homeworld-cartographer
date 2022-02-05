@@ -1,5 +1,6 @@
 package com.github.mihowjingle.cartographer.ui.model.level
 
+import com.github.mihowjingle.cartographer.model.level.Size
 import javafx.beans.property.SimpleDoubleProperty
 import tornadofx.getValue
 import tornadofx.setValue
@@ -32,5 +33,9 @@ class ObservableSize(x: Double = 0.0, z: Double = 0.0, y: Double = 0.0) {
 
     override fun toString(): String {
         return "ObservableSize(x=$x, z=$z, y=$y)"
+    }
+
+    fun toPersistent(): Size {
+        return Size(x, z, y)
     }
 }
