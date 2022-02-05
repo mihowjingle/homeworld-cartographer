@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.ui.views
+package com.github.mihowjingle.cartographer.function.strings
 
 import com.github.mihowjingle.cartographer.testutils.ShouldBe
 import com.github.mihowjingle.cartographer.testutils.ShouldBe.NO

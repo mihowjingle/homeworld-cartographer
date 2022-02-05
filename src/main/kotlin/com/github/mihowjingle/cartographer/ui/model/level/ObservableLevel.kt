@@ -2,7 +2,6 @@ package com.github.mihowjingle.cartographer.ui.model.level
 
 import com.github.mihowjingle.cartographer.model.entities.*
 import com.github.mihowjingle.cartographer.model.level.Level
-import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
@@ -22,7 +21,7 @@ class ObservableLevel(
     defaultMusic: String? = null,
     battleMusic: String? = null,
     val size: ObservableSize = ObservableSize(),
-    val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0),
+    val sensorsManagerCameraDistances: ObservableSMCD = ObservableSMCD(),
     val fog: ObservableFog = ObservableFog(),
     val pebbles: ObservableList<ObservablePebble> = observableListOf(),
     val asteroids: ObservableList<Asteroid> = observableListOf(),
@@ -31,7 +30,7 @@ class ObservableLevel(
     val dustClouds: ObservableList<DustCloud> = observableListOf(),
     val nebulae: ObservableList<Nebula> = observableListOf(),
     val salvage: ObservableList<Salvage> = observableListOf(),
-    val megaliths: ObservableList<Megalith> = observableListOf(),
+    val megaliths: ObservableList<Megalith> = observableListOf()
 ) {
 //    init {
 //        if (maxPlayers !in 2..8) { // actually maybe 1 player too? but would that be interesting anyway?
@@ -59,5 +58,12 @@ class ObservableLevel(
 
     override fun toString(): String {
         return "ObservableLevel(author=$author, name=$name, background=$background, maxPlayers=$maxPlayers, defaultMusic=$defaultMusic, battleMusic=$battleMusic, size=$size, sensorsManagerCameraDistances=$sensorsManagerCameraDistances, fog=$fog, pebbles=$pebbles, asteroids=$asteroids, startingPositions=$startingPositions, clouds=$clouds, dustClouds=$dustClouds, nebulae=$nebulae, salvage=$salvage, megaliths=$megaliths)"
+    }
+
+    /**
+     * !!! only top-level info, not [size], [fog], etc
+     */
+    val infoValid: Boolean get() {
+        return name != null && background != null && defaultMusic != null && battleMusic != null
     }
 }

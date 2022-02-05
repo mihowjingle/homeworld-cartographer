@@ -1,6 +1,5 @@
 package com.github.mihowjingle.cartographer.model.level
 
-import com.github.mihowjingle.cartographer.model.common.Constraint
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
@@ -11,7 +10,7 @@ data class Level(
     val background: Background,
     val maxPlayers: Int,
     val size: Size,
-    val sensorsManagerCameraDistances: Constraint<Double>,
+    val sensorsManagerCameraDistances: SensorManagerCameraDistances,
     val defaultMusic: Music,
     val battleMusic: Music,
     val fog: Fog,

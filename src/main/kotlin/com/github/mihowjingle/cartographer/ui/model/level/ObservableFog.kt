@@ -2,9 +2,7 @@ package com.github.mihowjingle.cartographer.ui.model.level
 
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.level.Fog
-import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.paint.Color
@@ -18,10 +16,10 @@ import com.github.mihowjingle.cartographer.model.common.Color as PersistentColor
 class ObservableFog(
     active: Boolean = false,
     type: String? = null,
-    start: Double = 0.0,
-    end: Double = 0.0,
+    start: String? = null,
+    end: String? = null,
     color: Color = Color(1.0, 1.0, 1.0, 1.0),
-    density: Double = 0.0
+    density: String? = null
 ) {
 
     val activeProperty = SimpleBooleanProperty(active)
@@ -30,29 +28,40 @@ class ObservableFog(
     val typeProperty = SimpleStringProperty(type)
     var type: String? by typeProperty
 
-    val gradient = ObservableConstraint(start, end)
+    val startProperty = SimpleStringProperty(start)
+    var start: String? by startProperty
+
+    val endProperty = SimpleStringProperty(end)
+    var end: String? by endProperty
 
     val colorProperty = SimpleObjectProperty(color)
     var color: Color by colorProperty
 
-    // todo private for now, until spinner is fixed for Double
-    //  and i can get rid of the workaround
-    //  btw file issue?
-    private val densityProperty = SimpleDoubleProperty(density)
-    var density: Double by densityProperty
+    val densityProperty = SimpleStringProperty(density)
+    var density: String? by densityProperty
 
     override fun toString(): String {
-        return "ObservableFog(active=$active, type=$type, gradient=$gradient, color=$color, density=$density)"
+        return "ObservableFog(active=$active, type=$type, start=$start, end=$end, color=$color, density=$density)"
+    }
+
+    val valid: Boolean get() {
+        if (!active) {
+            return true
+        }
+        val start = start?.toDoubleOrNull() ?: return false
+        val end = end?.toDoubleOrNull() ?: return false
+        val density = density?.toDoubleOrNull() ?: return false
+        return type != null && start > 0.0 && end > 0.0 && start <= end && density > 0.0 && density <= 1.0
     }
 
     fun toPersistent(): Fog {
         return Fog(
             active = active,
             type = FogType.values().find { it.label == type },
-            start = gradient.min,
-            end = gradient.max,
+            start = start?.toDouble(),
+            end = end?.toDouble(),
             color = PersistentColor(color.red, color.green, color.blue, color.opacity),
-            density = density
+            density = density?.toDouble()
         )
     }
 }

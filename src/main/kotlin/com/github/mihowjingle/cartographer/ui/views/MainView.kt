@@ -1,5 +1,6 @@
 package com.github.mihowjingle.cartographer.ui.views
 
+import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
@@ -19,6 +20,11 @@ class MainView : View("Homeworld Cartographer") {
 
     private val controller: ApplicationController by inject()
 
+    private val sizeValid = SimpleBooleanProperty(controller.currentLevel.size.valid)
+    private val smcdValid = SimpleBooleanProperty(controller.currentLevel.sensorsManagerCameraDistances.valid)
+    private val fogValid = SimpleBooleanProperty(controller.currentLevel.fog.valid)
+    private val levelInfoValid = SimpleBooleanProperty(controller.currentLevel.infoValid)
+
     override val root = vbox {
         menubar {
             menu("File") {
@@ -27,7 +33,7 @@ class MainView : View("Homeworld Cartographer") {
                 item("Save", "Ctrl+S") {
                     action(controller::save)
                     enableWhen {
-                        SimpleBooleanProperty(true) // todo valid
+                        sizeValid.and(smcdValid).and(fogValid).and(levelInfoValid)
                     }
                 }
                 separator()
@@ -105,9 +111,7 @@ class MainView : View("Homeworld Cartographer") {
                     item("Fog")
                     item("Music")
                 }
-                item("About").action {
-                    println(controller.currentLevel) // todo remove after testing
-                }
+                item("About")
             }
         }
         borderpane {
@@ -118,7 +122,11 @@ class MainView : View("Homeworld Cartographer") {
                         textfield(controller.currentLevel.authorProperty)
                     }
                     field("Name") {
-                        textfield(controller.currentLevel.nameProperty)
+                        textfield(controller.currentLevel.nameProperty) {
+                            setOnKeyReleased {
+                                levelInfoValid.set(controller.currentLevel.infoValid)
+                            }
+                        }
                     }
                     field("Max players") {
                         spinner(min = 2, max = 8, amountToStepBy = 1, enableScroll = true, editable = true, property = controller.currentLevel.maxPlayersProperty) {
@@ -129,43 +137,91 @@ class MainView : View("Homeworld Cartographer") {
                         combobox(controller.currentLevel.backgroundProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = Background.values().map { it.label }.toObservable()
+                            setOnAction {
+                                levelInfoValid.set(controller.currentLevel.infoValid)
+                            }
                         }
                     }
                     field("Default music") {
                         combobox(controller.currentLevel.defaultMusicProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = Music.values().map { it.label }.toObservable()
+                            setOnAction {
+                                levelInfoValid.set(controller.currentLevel.infoValid)
+                            }
                         }
                     }
                     field("Battle music") {
                         combobox(controller.currentLevel.battleMusicProperty) {
                             maxWidth = Double.MAX_VALUE
                             items = Music.values().map { it.label }.toObservable()
+                            setOnAction {
+                                levelInfoValid.set(controller.currentLevel.infoValid)
+                            }
                         }
                     }
                 }
                 fieldset("Size") {
                     field("X") {
-                        doubleInputWorkaround(controller.currentLevel.size::x)
+                        textfield(controller.currentLevel.size.xProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                sizeValid.set(controller.currentLevel.size.valid)
+                            }
+                        }
                     }
                     field("Z") {
-                        doubleInputWorkaround(controller.currentLevel.size::z)
+                        textfield(controller.currentLevel.size.zProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                sizeValid.set(controller.currentLevel.size.valid)
+                            }
+                        }
                     }
                     field("Y") {
-                        doubleInputWorkaround(controller.currentLevel.size::y)
+                        textfield(controller.currentLevel.size.yProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                sizeValid.set(controller.currentLevel.size.valid)
+                            }
+                        }
                     }
                 }
                 fieldset("Sensor manager camera distances") {
                     field("Min") {
-                        doubleInputWorkaround(controller.currentLevel.sensorsManagerCameraDistances::min)
+                        textfield(controller.currentLevel.sensorsManagerCameraDistances.minProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                smcdValid.set(controller.currentLevel.sensorsManagerCameraDistances.valid)
+                            }
+                        }
                     }
                     field("Max") {
-                        doubleInputWorkaround(controller.currentLevel.sensorsManagerCameraDistances::max)
+                        textfield(controller.currentLevel.sensorsManagerCameraDistances.maxProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                smcdValid.set(controller.currentLevel.sensorsManagerCameraDistances.valid)
+                            }
+                        }
                     }
                 }
                 fieldset("Fog") {
                     field("Active") {
-                        checkbox(property = controller.currentLevel.fog.activeProperty)
+                        checkbox(property = controller.currentLevel.fog.activeProperty) {
+                            setOnAction {
+                                fogValid.set(controller.currentLevel.fog.valid)
+                            }
+                        }
                     }
                     field("Type") {
                         combobox(controller.currentLevel.fog.typeProperty) {
@@ -174,13 +230,36 @@ class MainView : View("Homeworld Cartographer") {
                             enableWhen {
                                 controller.currentLevel.fog.activeProperty
                             }
+                            setOnAction {
+                                fogValid.set(controller.currentLevel.fog.valid)
+                            }
                         }
                     }
                     field("Start") {
-                        doubleInputWorkaround(controller.currentLevel.fog.gradient::min, enabled = controller.currentLevel.fog.activeProperty)
+                        textfield(controller.currentLevel.fog.startProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                fogValid.set(controller.currentLevel.fog.valid)
+                            }
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
+                        }
                     }
                     field("End") {
-                        doubleInputWorkaround(controller.currentLevel.fog.gradient::max, enabled = controller.currentLevel.fog.activeProperty)
+                        textfield(controller.currentLevel.fog.endProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                fogValid.set(controller.currentLevel.fog.valid)
+                            }
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
+                        }
                     }
                     field("Color") {
                         colorpicker(controller.currentLevel.fog.colorProperty) {
@@ -191,7 +270,17 @@ class MainView : View("Homeworld Cartographer") {
                         }
                     }
                     field("Density") {
-                        doubleInputWorkaround(controller.currentLevel.fog::density, enabled = controller.currentLevel.fog.activeProperty)
+                        textfield(controller.currentLevel.fog.densityProperty) {
+                            filterInput {
+                                it.controlNewText.canBecomeDouble(allowNegative = false)
+                            }
+                            setOnKeyReleased {
+                                fogValid.set(controller.currentLevel.fog.valid)
+                            }
+                            enableWhen {
+                                controller.currentLevel.fog.activeProperty
+                            }
+                        }
                     }
                 }
             }

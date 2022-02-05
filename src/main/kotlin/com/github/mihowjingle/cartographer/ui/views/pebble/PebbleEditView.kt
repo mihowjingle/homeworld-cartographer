@@ -4,7 +4,7 @@ import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
-import com.github.mihowjingle.cartographer.ui.views.canBecomeDouble
+import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
