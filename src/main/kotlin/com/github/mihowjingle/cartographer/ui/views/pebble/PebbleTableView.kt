@@ -14,7 +14,7 @@ class PebbleTableView : Fragment("Pebbles") {
 
     override val root = tableview(controller.currentLevel.pebbles) {
         columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
-        column("Type", ObservablePebble::typeProperty) {
+        column("Type", ObservablePebble::labelProperty) {
             minWidth = 100.0
         }
         column("Position: x", ObservablePebble::xProperty) {

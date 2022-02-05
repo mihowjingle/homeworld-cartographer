@@ -1,12 +1,13 @@
 package com.github.mihowjingle.cartographer.ui.views.pebble
 
+import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
+import com.github.mihowjingle.cartographer.ui.converters.PebbleTypeConverter
 import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
-import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
 class PebbleEditView : Fragment() {
@@ -15,7 +16,7 @@ class PebbleEditView : Fragment() {
 
     private val controller: ApplicationController by inject()
 
-    private val typeProperty = SimpleStringProperty()
+    private val typeProperty = SimpleObjectProperty(pebble.type)
     private val position = ObservablePosition()
 
     private val positionValid = SimpleBooleanProperty(pebble.type != null && pebble.position.valid)
@@ -40,7 +41,8 @@ class PebbleEditView : Fragment() {
             field("Type") {
                 combobox(typeProperty) {
                     maxWidth = Double.MAX_VALUE
-                    items = PebbleType.values().map { it.label }.toObservable()
+                    items = PebbleType.values().toList().toObservable()
+                    converter = PebbleTypeConverter
                 }
             }
             field("Position: x") {
