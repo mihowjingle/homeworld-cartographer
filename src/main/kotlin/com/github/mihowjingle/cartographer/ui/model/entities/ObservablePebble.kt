@@ -8,6 +8,9 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
 
+/**
+ * UI version of [Pebble]
+ */
 class ObservablePebble(type: String?, val position: ObservablePosition = ObservablePosition()) {
 
     val typeProperty = SimpleStringProperty(type)

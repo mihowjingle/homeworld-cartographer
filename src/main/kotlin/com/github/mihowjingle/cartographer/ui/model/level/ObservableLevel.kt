@@ -3,6 +3,7 @@ package com.github.mihowjingle.cartographer.ui.model.level
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
+import com.github.mihowjingle.cartographer.model.level.Level
 import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import javafx.beans.property.SimpleIntegerProperty
@@ -13,6 +14,9 @@ import tornadofx.getValue
 import tornadofx.observableListOf
 import tornadofx.setValue
 
+/**
+ * UI version of [Level]
+ */
 class ObservableLevel(
     author: String? = null,
     name: String? = null,

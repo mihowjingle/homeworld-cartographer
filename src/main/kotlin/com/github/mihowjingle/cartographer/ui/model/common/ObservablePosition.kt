@@ -1,10 +1,14 @@
 package com.github.mihowjingle.cartographer.ui.model.common
 
 import com.github.mihowjingle.cartographer.function.strings.isDouble
+import com.github.mihowjingle.cartographer.model.common.Position
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
 
+/**
+ * UI version of [Position]
+ */
 class ObservablePosition(x: String? = null, z: String? = null, y: String? = null) {
 
     constructor(other: ObservablePosition) : this(other.x, other.z, other.y)

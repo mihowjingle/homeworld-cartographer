@@ -1,11 +1,15 @@
 package com.github.mihowjingle.cartographer.ui.model.common
 
 import com.github.mihowjingle.cartographer.function.strings.isDouble
+import com.github.mihowjingle.cartographer.model.common.Orientation
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
 import kotlin.random.Random
 
+/**
+ * UI version of [Orientation]
+ */
 class ObservableOrientation(xAxis: String? = null, zAxis: String? = null, yAxis: String? = null) {
     companion object {
         fun random(): ObservableOrientation {

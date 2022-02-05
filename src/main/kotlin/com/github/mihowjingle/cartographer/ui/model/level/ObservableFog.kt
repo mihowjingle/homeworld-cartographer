@@ -11,6 +11,9 @@ import tornadofx.getValue
 import tornadofx.setValue
 import com.github.mihowjingle.cartographer.model.common.Color as PersistentColor
 
+/**
+ * UI version of [Fog]
+ */
 class ObservableFog(
     active: Boolean = false,
     type: FogType? = null,
