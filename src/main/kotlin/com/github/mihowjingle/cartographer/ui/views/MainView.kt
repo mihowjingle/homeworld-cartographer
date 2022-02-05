@@ -7,6 +7,8 @@ import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
+import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
+import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
 import javafx.geometry.Insets
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
@@ -39,7 +41,7 @@ class MainView : View("Homeworld Cartographer") {
                 item("Megaliths")
                 item("Nebulae")
                 item("Pebbles").action {
-                    find<PebblesTableView>().openWindow()
+                    find<PebbleTableView>().openWindow()
                 }
                 item("Salvage")
                 item("Starting positions")

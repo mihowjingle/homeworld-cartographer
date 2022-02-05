@@ -1,4 +1,4 @@
-package com.github.mihowjingle.cartographer.ui.views
+package com.github.mihowjingle.cartographer.ui.views.pebble
 
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
@@ -8,7 +8,7 @@ import tornadofx.column
 import tornadofx.onDoubleClick
 import tornadofx.tableview
 
-class PebblesTableView : Fragment("Pebbles") {
+class PebbleTableView : Fragment("Pebbles") {
 
     private val controller: ApplicationController by inject()
 
