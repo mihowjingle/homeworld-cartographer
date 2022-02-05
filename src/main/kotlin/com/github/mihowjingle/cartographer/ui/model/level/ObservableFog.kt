@@ -15,7 +15,7 @@ import com.github.mihowjingle.cartographer.model.common.Color as PersistentColor
  */
 class ObservableFog(
     active: Boolean = false,
-    type: String? = null,
+    type: FogType? = null,
     start: String? = null,
     end: String? = null,
     color: Color = Color(1.0, 1.0, 1.0, 1.0),
@@ -25,8 +25,8 @@ class ObservableFog(
     val activeProperty = SimpleBooleanProperty(active)
     var active: Boolean by activeProperty
 
-    val typeProperty = SimpleStringProperty(type)
-    var type: String? by typeProperty
+    val typeProperty = SimpleObjectProperty(type)
+    var type: FogType? by typeProperty
 
     val startProperty = SimpleStringProperty(start)
     var start: String? by startProperty
@@ -57,7 +57,7 @@ class ObservableFog(
     fun toPersistent(): Fog {
         return Fog(
             active = active,
-            type = FogType.values().find { it.label == type },
+            type = type,
             start = start?.toDouble(),
             end = end?.toDouble(),
             color = PersistentColor(color.red, color.green, color.blue, color.opacity),

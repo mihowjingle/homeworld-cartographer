@@ -5,6 +5,9 @@ import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
+import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
+import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
+import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
 import javafx.beans.property.SimpleBooleanProperty
@@ -137,7 +140,8 @@ class MainView : View("Homeworld Cartographer") {
                     field("Background") {
                         combobox(controller.currentLevel.backgroundProperty) {
                             maxWidth = Double.MAX_VALUE
-                            items = Background.values().map { it.label }.toObservable()
+                            items = Background.values().toList().toObservable()
+                            converter = BackgroundConverter
                             setOnAction {
                                 levelInfoValid.set(controller.currentLevel.infoValid)
                             }
@@ -146,7 +150,8 @@ class MainView : View("Homeworld Cartographer") {
                     field("Default music") {
                         combobox(controller.currentLevel.defaultMusicProperty) {
                             maxWidth = Double.MAX_VALUE
-                            items = Music.values().map { it.label }.toObservable()
+                            items = Music.values().toList().toObservable()
+                            converter = MusicConverter
                             setOnAction {
                                 levelInfoValid.set(controller.currentLevel.infoValid)
                             }
@@ -155,7 +160,8 @@ class MainView : View("Homeworld Cartographer") {
                     field("Battle music") {
                         combobox(controller.currentLevel.battleMusicProperty) {
                             maxWidth = Double.MAX_VALUE
-                            items = Music.values().map { it.label }.toObservable()
+                            items = Music.values().toList().toObservable()
+                            converter = MusicConverter
                             setOnAction {
                                 levelInfoValid.set(controller.currentLevel.infoValid)
                             }
@@ -227,7 +233,8 @@ class MainView : View("Homeworld Cartographer") {
                     field("Type") {
                         combobox(controller.currentLevel.fog.typeProperty) {
                             maxWidth = Double.MAX_VALUE
-                            items = FogType.values().map { it.label }.toObservable()
+                            items = FogType.values().toList().toObservable()
+                            converter = FogTypeConverter
                             enableWhen {
                                 controller.currentLevel.fog.activeProperty
                             }
