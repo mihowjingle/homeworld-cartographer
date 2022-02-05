@@ -92,7 +92,8 @@ class MainView : View("Homeworld Cartographer") {
             menu("Examine") {
                 item("Count objects")
                 item("How far starting positions are from each other, how un/fair it is")
-                item("All kinds of diagnostics/reports")
+                item("Validate")
+                item("Check size (at some point shadows start flickering, SM plane disappears etc.)")
                 item("... and so on")
             }
             menu("Help") {
