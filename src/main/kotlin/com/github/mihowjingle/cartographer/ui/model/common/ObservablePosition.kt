@@ -1,20 +1,22 @@
 package com.github.mihowjingle.cartographer.ui.model.common
 
-import javafx.beans.property.SimpleDoubleProperty
+import com.github.mihowjingle.cartographer.function.strings.isDouble
+import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
 
-/**
- * z = height!
- */
-class ObservablePosition(x: Double, z: Double, y: Double) {
+class ObservablePosition(x: String? = null, z: String? = null, y: String? = null) {
 
-    val xProperty = SimpleDoubleProperty(x)
-    var x: Double by xProperty
+    constructor(other: ObservablePosition) : this(other.x, other.z, other.y)
 
-    val zProperty = SimpleDoubleProperty(z)
-    var z: Double by zProperty
+    val xProperty = SimpleStringProperty(x)
+    var x: String? by xProperty
 
-    val yProperty = SimpleDoubleProperty(y)
-    var y: Double by yProperty
+    val zProperty = SimpleStringProperty(z)
+    var z: String? by zProperty
+
+    val yProperty = SimpleStringProperty(y)
+    var y: String? by yProperty
+
+    val valid: Boolean get() = x.isDouble() && z.isDouble() && y.isDouble()
 }

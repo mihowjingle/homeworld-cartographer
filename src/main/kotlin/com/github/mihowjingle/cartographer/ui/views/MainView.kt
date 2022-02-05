@@ -56,7 +56,10 @@ class MainView : View("Homeworld Cartographer") {
                     find<PebbleCreateView>().openModal()
                 }
                 item("Salvage")
-                item("Starting position")
+                //item("Starting position") todo either add/remove on-change of maxPlayers or maxPlayers is readonly and simply = startingPositions.count
+            }
+            menu("History") {
+                item("Undo and stuff...")
             }
             menu("Batch generate") {
                 item("Stuff 1")

@@ -14,20 +14,22 @@ class PebblesTableView : Fragment("Pebbles") {
 
     override val root = tableview(controller.currentLevel.pebbles) {
         columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
-        column("Type", ObservablePebble::labelProperty) {
+        column("Type", ObservablePebble::typeProperty) {
             minWidth = 100.0
         }
-        column("x", ObservablePebble::xProperty) {
+        column("Position: x", ObservablePebble::xProperty) {
             minWidth = 100.0
         }
-        column("z", ObservablePebble::zProperty) {
+        column("Position: z", ObservablePebble::zProperty) {
             minWidth = 100.0
         }
-        column("y", ObservablePebble::yProperty) {
+        column("Position: y", ObservablePebble::yProperty) {
             minWidth = 100.0
         }
         onDoubleClick {
-            find<PebbleEditView>(mapOf(PebbleEditView::pebble to selectionModel.selectedItem)).openModal()
+            if (selectionModel.selectedItem != null) {
+                find<PebbleEditView>(mapOf(PebbleEditView::pebble to selectionModel.selectedItem)).openModal()
+            }
         }
     }
 }

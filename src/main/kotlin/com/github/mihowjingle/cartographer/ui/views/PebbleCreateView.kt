@@ -2,48 +2,89 @@ package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
-import com.github.mihowjingle.cartographer.ui.converters.PebbleTypeConverter
 import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
-import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
 class PebbleCreateView : Fragment() {
 
     private val controller: ApplicationController by inject()
 
-    private val typeProperty = SimpleObjectProperty<PebbleType>()
-    private val position = ObservablePosition(0.0, 0.0, 0.0)
+    private val typeProperty = SimpleStringProperty()
+    private val position = ObservablePosition()
+
+    private val positionValid = SimpleBooleanProperty(false)
+
+    private fun saveAndClose() {
+        controller.currentLevel.pebbles.add(ObservablePebble(typeProperty.value, position)) // todo controller method?
+        close()
+    }
 
     override val root = form {
         fieldset("Creating a pebble") {
             field("Type") {
                 combobox(typeProperty) {
                     maxWidth = Double.MAX_VALUE
-                    items = PebbleType.values().toList().toObservable()
-                    converter = PebbleTypeConverter
+                    items = PebbleType.values().map { it.label }.toObservable()
                 }
             }
             field("Position: x") {
-                doubleInputWorkaround(position::x, allowNegative = true)
+                textfield(position.xProperty) {
+                    filterInput {
+                        it.controlNewText.canBecomeDouble(allowNegative = true)
+                    }
+                    setOnKeyReleased {
+                        positionValid.set(position.valid)
+                    }
+                    setOnAction {
+                        if (typeProperty.isNotNull.and(positionValid).value) {
+                            saveAndClose()
+                        }
+                    }
+                }
             }
             field("Position: z") {
-                doubleInputWorkaround(position::z, allowNegative = true)
+                textfield(position.zProperty) {
+                    filterInput {
+                        it.controlNewText.canBecomeDouble(allowNegative = true)
+                    }
+                    setOnKeyReleased {
+                        positionValid.set(position.valid)
+                    }
+                    setOnAction {
+                        if (typeProperty.isNotNull.and(positionValid).value) {
+                            saveAndClose()
+                        }
+                    }
+                }
             }
             field("Position: y") {
-                doubleInputWorkaround(position::y, allowNegative = true)
+                textfield(position.yProperty) {
+                    filterInput {
+                        it.controlNewText.canBecomeDouble(allowNegative = true)
+                    }
+                    setOnKeyReleased {
+                        positionValid.set(position.valid)
+                    }
+                    setOnAction {
+                        if (typeProperty.isNotNull.and(positionValid).value) {
+                            saveAndClose()
+                        }
+                    }
+                }
             }
             field {
                 button("Cancel").action {
                     close()
                 }
-                button("Commit") {
+                button("Save") {
                     action {
-                        controller.currentLevel.pebbles.add(ObservablePebble(typeProperty.value, position))
-                        close()
+                        saveAndClose()
                     }
                     enableWhen {
-                        typeProperty.isNotNull
+                        typeProperty.isNotNull.and(positionValid)
                     }
                 }
             }

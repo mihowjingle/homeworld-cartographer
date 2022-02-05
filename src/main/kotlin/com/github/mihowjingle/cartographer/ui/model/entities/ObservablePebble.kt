@@ -1,24 +1,16 @@
 package com.github.mihowjingle.cartographer.ui.model.entities
 
-import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
-import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import tornadofx.getValue
+import tornadofx.setValue
 
-class ObservablePebble(type: PebbleType, val position: ObservablePosition = ObservablePosition(0.0, 0.0, 0.0)) {
+class ObservablePebble(type: String?, val position: ObservablePosition = ObservablePosition()) {
 
-    val typeProperty = SimpleObjectProperty(type)
-    var type: PebbleType
-        get() {
-            return typeProperty.value
-        }
-        set(value) {
-            typeProperty.value = value
-            labelProperty.value = value.label
-        }
+    val typeProperty = SimpleStringProperty(type)
+    var type: String? by typeProperty
 
-    val labelProperty = SimpleStringProperty(type.label) // needed because cellFormat makes column border disappear...
-
+    // for tableview columns only
     val xProperty by position::xProperty
     val zProperty by position::zProperty
     val yProperty by position::yProperty
