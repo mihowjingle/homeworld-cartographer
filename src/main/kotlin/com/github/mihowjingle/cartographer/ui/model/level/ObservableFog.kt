@@ -6,6 +6,7 @@ import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleStringProperty
 import javafx.scene.paint.Color
 import tornadofx.getValue
 import tornadofx.setValue
@@ -16,7 +17,7 @@ import com.github.mihowjingle.cartographer.model.common.Color as PersistentColor
  */
 class ObservableFog(
     active: Boolean = false,
-    type: FogType? = null,
+    type: String? = null,
     start: Double = 0.0,
     end: Double = 0.0,
     color: Color = Color(1.0, 1.0, 1.0, 1.0),
@@ -26,8 +27,8 @@ class ObservableFog(
     val activeProperty = SimpleBooleanProperty(active)
     var active: Boolean by activeProperty
 
-    val typeProperty = SimpleObjectProperty(type)
-    var type: FogType? by typeProperty
+    val typeProperty = SimpleStringProperty(type)
+    var type: String? by typeProperty
 
     val gradient = ObservableConstraint(start, end)
 
@@ -47,7 +48,7 @@ class ObservableFog(
     fun toPersistent(): Fog {
         return Fog(
             active = active,
-            type = type,
+            type = FogType.values().find { it.label == type },
             start = gradient.min,
             end = gradient.max,
             color = PersistentColor(color.red, color.green, color.blue, color.opacity),

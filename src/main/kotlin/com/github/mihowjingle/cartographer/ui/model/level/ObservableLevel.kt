@@ -1,13 +1,10 @@
 package com.github.mihowjingle.cartographer.ui.model.level
 
-import com.github.mihowjingle.cartographer.model.dictionaries.Background
-import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
 import com.github.mihowjingle.cartographer.model.level.Level
 import com.github.mihowjingle.cartographer.ui.model.common.ObservableConstraint
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import javafx.beans.property.SimpleIntegerProperty
-import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
 import tornadofx.getValue
@@ -21,9 +18,9 @@ class ObservableLevel(
     author: String? = null,
     name: String? = null,
     maxPlayers: Int = 2,
-    background: Background? = null,
-    defaultMusic: Music? = null,
-    battleMusic: Music? = null,
+    background: String? = null,
+    defaultMusic: String? = null,
+    battleMusic: String? = null,
     val size: ObservableSize = ObservableSize(),
     val sensorsManagerCameraDistances: ObservableConstraint<Double> = ObservableConstraint(0.0, 0.0),
     val fog: ObservableFog = ObservableFog(),
@@ -51,14 +48,14 @@ class ObservableLevel(
     val maxPlayersProperty = SimpleIntegerProperty(maxPlayers)
     var maxPlayers: Int by maxPlayersProperty
 
-    val backgroundProperty = SimpleObjectProperty(background)
-    var background: Background? by backgroundProperty
+    val backgroundProperty = SimpleStringProperty(background)
+    var background: String? by backgroundProperty
 
-    val defaultMusicProperty = SimpleObjectProperty(defaultMusic)
-    var defaultMusic: Music? by defaultMusicProperty
+    val defaultMusicProperty = SimpleStringProperty(defaultMusic)
+    var defaultMusic: String? by defaultMusicProperty
 
-    val battleMusicProperty = SimpleObjectProperty(battleMusic)
-    var battleMusic: Music? by battleMusicProperty
+    val battleMusicProperty = SimpleStringProperty(battleMusic)
+    var battleMusic: String? by battleMusicProperty
 
     override fun toString(): String {
         return "ObservableLevel(author=$author, name=$name, background=$background, maxPlayers=$maxPlayers, defaultMusic=$defaultMusic, battleMusic=$battleMusic, size=$size, sensorsManagerCameraDistances=$sensorsManagerCameraDistances, fog=$fog, pebbles=$pebbles, asteroids=$asteroids, startingPositions=$startingPositions, clouds=$clouds, dustClouds=$dustClouds, nebulae=$nebulae, salvage=$salvage, megaliths=$megaliths)"
