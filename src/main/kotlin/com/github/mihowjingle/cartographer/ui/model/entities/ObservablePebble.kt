@@ -11,17 +11,16 @@ import javafx.beans.property.SimpleStringProperty
  */
 class ObservablePebble(type: PebbleType?, val position: ObservablePosition = ObservablePosition()) {
 
-    var type: PebbleType? = type
+    val typeProperty = SimpleStringProperty(type?.label) // cellFormat makes column border disappear :/, so... SimpleStringProperty not SimpleObjectProperty
+    var type: PebbleType?
         get() {
             return PebbleType.values().find { it.label == typeProperty.value }
         }
         set(value) {
             typeProperty.value = value?.label
-            field = value
         }
 
     // for tableview columns only
-    val typeProperty = SimpleStringProperty(type?.label) // cellFormat makes column border disappear :/, so... SimpleStringProperty not SimpleObjectProperty
     val xProperty by position::xProperty
     val zProperty by position::zProperty
     val yProperty by position::yProperty
