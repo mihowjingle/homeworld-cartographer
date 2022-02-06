@@ -3,11 +3,8 @@ package com.github.mihowjingle.cartographer.ui.views.pebble
 import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import com.github.mihowjingle.cartographer.model.dictionaries.PebbleType
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
-import com.github.mihowjingle.cartographer.ui.converters.PebbleTypeConverter
-import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleObjectProperty
 import tornadofx.*
 
 class PebbleEditView : Fragment() {
@@ -16,75 +13,67 @@ class PebbleEditView : Fragment() {
 
     private val controller: ApplicationController by inject()
 
-    private val typeProperty = SimpleObjectProperty(pebble.type)
-    private val position = ObservablePosition()
+    private val editedPebble = ObservablePebble(null)
 
     private val positionValid = SimpleBooleanProperty(pebble.type != null && pebble.position.valid)
 
     override fun onDock() {
-        typeProperty.value = pebble.type
-        position.x = pebble.position.x
-        position.z = pebble.position.z
-        position.y = pebble.position.y
+        pebble copyInto editedPebble
     }
 
     private fun saveAndClose() {
-        pebble.type = typeProperty.value
-        pebble.position.x = position.x
-        pebble.position.z = position.z
-        pebble.position.y = position.y
+        editedPebble copyInto pebble
         close()
     }
 
     override val root = form {
         fieldset("Editing a pebble") {
             field("Type") {
-                combobox(typeProperty) {
+                combobox(editedPebble.typeProperty) {
                     maxWidth = Double.MAX_VALUE
-                    items = PebbleType.values().toList().toObservable()
-                    converter = PebbleTypeConverter
+                    items = PebbleType.values().map { it.label }.toObservable()
                 }
             }
             field("Position: x") {
-                textfield(position.xProperty) {
+                textfield(editedPebble.position.xProperty) {
                     filterInput {
                         it.controlNewText.canBecomeDouble(allowNegative = true)
                     }
                     setOnKeyReleased {
-                        positionValid.set(position.valid)
+                        positionValid.set(editedPebble.position.valid)
                     }
                     setOnAction {
-                        if (typeProperty.isNotNull.and(positionValid).value) {
+                        if (editedPebble.typeProperty.isNotNull.and(positionValid).value) {
                             saveAndClose()
                         }
                     }
                 }
             }
             field("Position: z") {
-                textfield(position.zProperty) {
+                textfield(editedPebble.position.zProperty) {
                     filterInput {
                         it.controlNewText.canBecomeDouble(allowNegative = true)
                     }
                     setOnKeyReleased {
-                        positionValid.set(position.valid)
+                        positionValid.set(editedPebble.position.valid)
                     }
                     setOnAction {
-                        if (typeProperty.isNotNull.and(positionValid).value) {
+                        if (editedPebble.typeProperty.isNotNull.and(positionValid).value) {
                             saveAndClose()
                         }
                     }
                 }
             }
             field("Position: y") {
-                textfield(position.yProperty) {
+                textfield(editedPebble.position.yProperty) {
                     filterInput {
                         it.controlNewText.canBecomeDouble(allowNegative = true)
                     }
                     setOnKeyReleased {
-                        positionValid.set(position.valid)
+                        positionValid.set(editedPebble.position.valid)
                     }
                     setOnAction {
-                        if (typeProperty.isNotNull.and(positionValid).value) {
+                        if (editedPebble.typeProperty.isNotNull.and(positionValid).value) {
                             saveAndClose()
                         }
                     }
@@ -99,7 +88,7 @@ class PebbleEditView : Fragment() {
                         saveAndClose()
                     }
                     enableWhen {
-                        typeProperty.isNotNull.and(positionValid)
+                        editedPebble.typeProperty.isNotNull.and(positionValid)
                     }
                 }
                 button("Delete").action {

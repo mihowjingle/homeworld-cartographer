@@ -37,4 +37,10 @@ class ObservableOrientation(xAxis: Double? = null, zAxis: Double? = null, yAxis:
         val yAxis = yAxis ?: error("Orientation: y axis should not be null at this point!")
         return Orientation(xAxis, zAxis, yAxis)
     }
+
+    infix fun copyInto(other: ObservableOrientation) {
+        other.xAxis = this.xAxis
+        other.zAxis = this.zAxis
+        other.yAxis = this.yAxis
+    }
 }

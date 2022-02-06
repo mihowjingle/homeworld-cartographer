@@ -28,4 +28,9 @@ class ObservablePebble(type: PebbleType?, val position: ObservablePosition = Obs
         val type = type ?: error("Pebble type should not be null at this point!")
         return Pebble(type, position.toPersistent())
     }
+
+    infix fun copyInto(other: ObservablePebble) {
+        other.type = this.type
+        this.position copyInto other.position
+    }
 }

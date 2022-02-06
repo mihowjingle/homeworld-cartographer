@@ -28,4 +28,10 @@ class ObservablePosition(x: Double? = null, z: Double? = null, y: Double? = null
         val y = y ?: error("Position: y should not be null at this point!")
         return Position(x, z, y)
     }
+
+    infix fun copyInto(other: ObservablePosition) {
+        other.x = this.x
+        other.z = this.z
+        other.y = this.y
+    }
 }
