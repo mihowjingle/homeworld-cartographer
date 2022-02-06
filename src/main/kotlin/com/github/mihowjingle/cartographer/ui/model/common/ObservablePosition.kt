@@ -21,4 +21,11 @@ class ObservablePosition(x: Double? = null, z: Double? = null, y: Double? = null
     var y: Double? by FxDoublePropertyDelegate(yProperty)
 
     val valid: Boolean get() = x != null && z != null && y != null
+
+    fun toPersistent(): Position {
+        val x = x ?: error("Position: x should not be null at this point!")
+        val z = z ?: error("Position: z should not be null at this point!")
+        val y = y ?: error("Position: y should not be null at this point!")
+        return Position(x, z, y)
+    }
 }

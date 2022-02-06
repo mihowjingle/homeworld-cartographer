@@ -11,10 +11,10 @@ import kotlin.random.Random
 class ObservableOrientation(xAxis: Double? = null, zAxis: Double? = null, yAxis: Double? = null) {
     companion object {
         fun random(): ObservableOrientation {
-            val x = Random.nextDouble(360.0)
-            val z = Random.nextDouble(360.0)
-            val y = Random.nextDouble(360.0)
-            return ObservableOrientation(x, z, y)
+            val xAxis = Random.nextDouble(360.0)
+            val zAxis = Random.nextDouble(360.0)
+            val yAxis = Random.nextDouble(360.0)
+            return ObservableOrientation(xAxis, zAxis, yAxis)
         }
     }
 
@@ -30,4 +30,11 @@ class ObservableOrientation(xAxis: Double? = null, zAxis: Double? = null, yAxis:
     var yAxis: Double? by FxDoublePropertyDelegate(yAxisProperty)
 
     val valid: Boolean get() = xAxis != null && zAxis != null && yAxis != null
+
+    fun toPersistent(): Orientation {
+        val xAxis = xAxis ?: error("Orientation: x axis should not be null at this point!")
+        val zAxis = zAxis ?: error("Orientation: z axis should not be null at this point!")
+        val yAxis = yAxis ?: error("Orientation: y axis should not be null at this point!")
+        return Orientation(xAxis, zAxis, yAxis)
+    }
 }
