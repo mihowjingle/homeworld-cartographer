@@ -6,7 +6,7 @@ package com.github.mihowjingle.cartographer.function.strings
  * even though "-" is not a valid Double value itself.
  * For the same reason, empty String is also ok - empty string can become any string after some keystrokes. Etc.
  */
-fun String.canBecomeDouble(allowNegative: Boolean = false): Boolean {
+fun String.canBecomeDouble(allowNegative: Boolean): Boolean {
 
     if (this == "") {
         return true
