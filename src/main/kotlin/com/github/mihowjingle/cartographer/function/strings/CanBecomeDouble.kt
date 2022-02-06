@@ -20,6 +20,10 @@ fun String.canBecomeDouble(allowNegative: Boolean = false): Boolean {
         return false
     }
 
+    if (this.any { char -> char.isLetter() }) {
+        return false
+    }
+
     return try {
         this.toDouble()
         true

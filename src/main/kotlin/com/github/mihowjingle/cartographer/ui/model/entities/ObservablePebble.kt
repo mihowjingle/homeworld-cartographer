@@ -26,9 +26,9 @@ class ObservablePebble(type: PebbleType?, val position: ObservablePosition = Obs
     val yProperty by position::yProperty
 
     fun toPersistent(): Pebble {
-        val x = position.x?.toDouble() ?: error("Position: x should not be null at this point!")
-        val z = position.z?.toDouble() ?: error("Position: z should not be null at this point!")
-        val y = position.y?.toDouble() ?: error("Position: y should not be null at this point!")
+        val x = position.x ?: error("Position: x should not be null at this point!")
+        val z = position.z ?: error("Position: z should not be null at this point!")
+        val y = position.y ?: error("Position: y should not be null at this point!")
         val type = type ?: error("Pebble type should not be null at this point!")
         return Pebble(type, Position(x, z, y))
     }

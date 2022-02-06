@@ -1,35 +1,33 @@
 package com.github.mihowjingle.cartographer.ui.model.common
 
-import com.github.mihowjingle.cartographer.function.strings.isDouble
+import com.github.mihowjingle.cartographer.delegate.FxDoublePropertyDelegate
 import com.github.mihowjingle.cartographer.model.common.Orientation
 import javafx.beans.property.SimpleStringProperty
-import tornadofx.getValue
-import tornadofx.setValue
 import kotlin.random.Random
 
 /**
  * UI version of [Orientation]
  */
-class ObservableOrientation(xAxis: String? = null, zAxis: String? = null, yAxis: String? = null) {
+class ObservableOrientation(xAxis: Double? = null, zAxis: Double? = null, yAxis: Double? = null) {
     companion object {
         fun random(): ObservableOrientation {
-            val x = Random.nextDouble(360.0).toString()
-            val z = Random.nextDouble(360.0).toString()
-            val y = Random.nextDouble(360.0).toString()
+            val x = Random.nextDouble(360.0)
+            val z = Random.nextDouble(360.0)
+            val y = Random.nextDouble(360.0)
             return ObservableOrientation(x, z, y)
         }
     }
 
     constructor(other: ObservableOrientation) : this(other.xAxis, other.zAxis, other.yAxis)
 
-    val xAxisProperty = SimpleStringProperty(xAxis)
-    var xAxis: String? by xAxisProperty
+    val xAxisProperty = SimpleStringProperty(xAxis?.toString())
+    var xAxis: Double? by FxDoublePropertyDelegate(xAxisProperty)
 
-    val zAxisProperty = SimpleStringProperty(zAxis)
-    var zAxis: String? by zAxisProperty
+    val zAxisProperty = SimpleStringProperty(zAxis?.toString())
+    var zAxis: Double? by FxDoublePropertyDelegate(zAxisProperty)
 
-    val yAxisProperty = SimpleStringProperty(yAxis)
-    var yAxis: String? by yAxisProperty
+    val yAxisProperty = SimpleStringProperty(yAxis?.toString())
+    var yAxis: Double? by FxDoublePropertyDelegate(yAxisProperty)
 
-    val valid: Boolean get() = xAxis.isDouble() && zAxis.isDouble() && yAxis.isDouble()
+    val valid: Boolean get() = xAxis != null && zAxis != null && yAxis != null
 }

@@ -1,26 +1,24 @@
 package com.github.mihowjingle.cartographer.ui.model.common
 
-import com.github.mihowjingle.cartographer.function.strings.isDouble
+import com.github.mihowjingle.cartographer.delegate.FxDoublePropertyDelegate
 import com.github.mihowjingle.cartographer.model.common.Position
 import javafx.beans.property.SimpleStringProperty
-import tornadofx.getValue
-import tornadofx.setValue
 
 /**
  * UI version of [Position]
  */
-class ObservablePosition(x: String? = null, z: String? = null, y: String? = null) {
+class ObservablePosition(x: Double? = null, z: Double? = null, y: Double? = null) {
 
     constructor(other: ObservablePosition) : this(other.x, other.z, other.y)
 
-    val xProperty = SimpleStringProperty(x)
-    var x: String? by xProperty
+    val xProperty = SimpleStringProperty(x?.toString())
+    var x: Double? by FxDoublePropertyDelegate(xProperty)
 
-    val zProperty = SimpleStringProperty(z)
-    var z: String? by zProperty
+    val zProperty = SimpleStringProperty(z?.toString())
+    var z: Double? by FxDoublePropertyDelegate(zProperty)
 
-    val yProperty = SimpleStringProperty(y)
-    var y: String? by yProperty
+    val yProperty = SimpleStringProperty(y?.toString())
+    var y: Double? by FxDoublePropertyDelegate(yProperty)
 
-    val valid: Boolean get() = x.isDouble() && z.isDouble() && y.isDouble()
+    val valid: Boolean get() = x != null && z != null && y != null
 }
