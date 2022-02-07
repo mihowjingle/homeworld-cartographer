@@ -35,16 +35,16 @@ class AsteroidTableView : Fragment("Asteroids") {
         column("Init. orient.: x axis", ObservableAsteroid::initialOrientationXAxisProperty) {
             minWidth = 100.0
         }
-        column("Init. orient.: z axis", ObservableAsteroid::initialOrientationYAxisProperty) {
+        column("Init. orient.: z axis", ObservableAsteroid::initialOrientationZAxisProperty) {
             minWidth = 100.0
         }
-        column("Init. orient.: y axis", ObservableAsteroid::initialOrientationZAxisProperty) {
+        column("Init. orient.: y axis", ObservableAsteroid::initialOrientationYAxisProperty) {
             minWidth = 100.0
         }
         onDoubleClick {
-//            if (selectionModel.selectedItem != null) {
-//                find<AsteroidEditView>(mapOf(AsteroidEditView::asteroid to selectionModel.selectedItem)).openModal()
-//            }
+            if (selectionModel.selectedItem != null) {
+                find<AsteroidEditView>(mapOf(AsteroidEditView::asteroid to selectionModel.selectedItem)).openModal()
+            }
         }
     }
 }

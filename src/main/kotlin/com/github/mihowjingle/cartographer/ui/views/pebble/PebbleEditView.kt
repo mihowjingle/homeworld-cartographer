@@ -15,7 +15,7 @@ class PebbleEditView : Fragment() {
 
     private val editedPebble = ObservablePebble(null)
 
-    private val positionValid = SimpleBooleanProperty(pebble.type != null && pebble.position.valid)
+    private val positionValid = SimpleBooleanProperty(pebble.position.valid)
 
     override fun onDock() {
         pebble copyInto editedPebble
