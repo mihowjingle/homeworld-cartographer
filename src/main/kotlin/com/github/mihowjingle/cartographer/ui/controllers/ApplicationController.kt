@@ -2,6 +2,8 @@ package com.github.mihowjingle.cartographer.ui.controllers
 
 import com.github.mihowjingle.cartographer.function.level.toLua
 import com.github.mihowjingle.cartographer.function.level.toPersistent
+import com.github.mihowjingle.cartographer.ui.model.entities.ObservableAsteroid
+import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import com.github.mihowjingle.cartographer.ui.model.level.ObservableLevel
 import javafx.stage.FileChooser
 import tornadofx.Controller
@@ -33,5 +35,13 @@ class ApplicationController : Controller() {
         }
         val file = files[0]
         file.writeText(levelLuaString)
+    }
+
+    fun addPebble(pebble: ObservablePebble) {
+        currentLevel.pebbles.add(pebble)
+    }
+
+    fun addAsteroid(asteroid: ObservableAsteroid) {
+        currentLevel.asteroids.add(asteroid)
     }
 }

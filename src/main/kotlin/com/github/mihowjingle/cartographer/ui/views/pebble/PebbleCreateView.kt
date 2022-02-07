@@ -16,7 +16,7 @@ class PebbleCreateView : Fragment() {
     private val positionValid = SimpleBooleanProperty(false)
 
     private fun saveAndClose() {
-        controller.currentLevel.pebbles.add(pebble) // todo controller method?
+        controller.addPebble(pebble)
         close()
     }
 

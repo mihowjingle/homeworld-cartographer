@@ -11,7 +11,7 @@ data class Asteroid(
     val type: AsteroidType,
     val position: Position,
     val percentOfDefaultRus: Double,
-    val initialOrientation: Orientation = Orientation.random()
+    val initialOrientation: Orientation
 ) : LevelEntity {
 
     val effectiveRus = percentOfDefaultRus * type.defaultRus / 100

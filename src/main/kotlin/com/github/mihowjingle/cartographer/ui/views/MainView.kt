@@ -8,6 +8,8 @@ import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
+import com.github.mihowjingle.cartographer.ui.views.asteroid.AsteroidCreateView
+import com.github.mihowjingle.cartographer.ui.views.asteroid.AsteroidTableView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
 import javafx.beans.property.SimpleBooleanProperty
@@ -45,7 +47,9 @@ class MainView : View("Homeworld Cartographer") {
                 }
             }
             menu("Show") {
-                item("Asteroids")
+                item("Asteroids").action {
+                    find<AsteroidTableView>().openWindow()
+                }
                 item("Clouds")
                 item("Dust clouds")
                 item("Megaliths")
@@ -59,7 +63,9 @@ class MainView : View("Homeworld Cartographer") {
                 item("All objects")
             }
             menu("Add object") {
-                item("Asteroid")
+                item("Asteroid").action {
+                    find<AsteroidCreateView>().openModal()
+                }
                 item("Cloud")
                 item("Dust cloud")
                 item("Megalith")
