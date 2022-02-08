@@ -88,8 +88,8 @@ class MainView : View("Homeworld Cartographer") {
                 item("Undo and stuff...")
             }
             menu("Batch generate") {
-                item("Stuff 1")
-                item("Stuff 2")
+                item("Literally a whole random level")
+                item("1000 pebbles or something")
                 item("... and so on")
             }
             menu("Manipulate") {
@@ -97,6 +97,7 @@ class MainView : View("Homeworld Cartographer") {
                 item("Rotate whole level (around z axis)")
                 item("Scale whole level")
                 item("Randomize")
+                item("Group objects and move the group around, or something")
                 item("Orient all starting positions towards center")
                 item("Apply gravity (slightly condense groups of objects, dust clouds etc)")
                 item("... and so on")
