@@ -1,6 +1,7 @@
 package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
+import com.github.mihowjingle.cartographer.function.strings.isNotDigit
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
@@ -16,10 +17,12 @@ import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.geometry.Insets
 import javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY
+import javafx.scene.control.TextFormatter
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
 import tornadofx.*
+import java.util.function.UnaryOperator
 import kotlin.system.exitProcess
 import javafx.scene.layout.Background as FXBackground
 
@@ -75,7 +78,6 @@ class MainView : View("Homeworld Cartographer") {
                     find<PebbleCreateView>().openModal()
                 }
                 item("Salvage")
-                //item("Starting position") todo either add/remove on-change of maxPlayers or maxPlayers is readonly and simply = startingPositions.count
             }
             menu("History") {
                 item("Undo and stuff...")
@@ -142,6 +144,16 @@ class MainView : View("Homeworld Cartographer") {
                     field("Max players") {
                         spinner(min = 2, max = 8, amountToStepBy = 1, enableScroll = true, editable = true, property = controller.currentLevel.maxPlayersProperty) {
                             maxWidth = Double.MAX_VALUE
+                            val filter: UnaryOperator<TextFormatter.Change?> = UnaryOperator {
+                                if (it == null) {
+                                    throw IllegalStateException("What? maxPlayers change is null!")
+                                }
+                                if (it.isContentChange && it.controlNewText.isNotDigit()) {
+                                    return@UnaryOperator null
+                                }
+                                return@UnaryOperator it
+                            }
+                            editor.textFormatter = TextFormatter<Int>(filter)
                             valueProperty().addListener { _, oldValue, newValue ->
                                 controller.syncStartingPositions(oldValue as Int, newValue as Int)
                             }
