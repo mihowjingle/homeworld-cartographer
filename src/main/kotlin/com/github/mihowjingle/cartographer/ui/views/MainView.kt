@@ -52,6 +52,11 @@ class MainView : View("Homeworld Cartographer") {
                     }
                 }
                 separator()
+                item("Preferences", "Ctrl+P") {
+                    // like minAcceptableDistance between starting positions, level size etc., with healthy defaults
+                    // instead of hard-coded
+                    // and other app-related config
+                }
                 item("Quit", "Ctrl+Q").action {
                     exitProcess(0)
                 }
