@@ -5,15 +5,16 @@ import com.github.mihowjingle.cartographer.function.strings.isNotDigit
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
-import com.github.mihowjingle.cartographer.model.entities.StartingPosition
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
 import com.github.mihowjingle.cartographer.ui.converters.MusicConverter
+import com.github.mihowjingle.cartographer.ui.model.entities.ObservableStartingPosition
 import com.github.mihowjingle.cartographer.ui.views.asteroid.AsteroidCreateView
 import com.github.mihowjingle.cartographer.ui.views.asteroid.AsteroidTableView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
+import com.github.mihowjingle.cartographer.ui.views.players.StartingPositionEditView
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.geometry.Insets
 import javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY
@@ -310,20 +311,25 @@ class MainView : View("Homeworld Cartographer") {
                         columnResizePolicy = CONSTRAINED_RESIZE_POLICY
                         maxHeight = 218.0
                         maxHeight = 218.0
-                        readonlyColumn("Index", StartingPosition::playerIndex) {
+                        readonlyColumn("Index", ObservableStartingPosition::playerIndex) {
                             minWidth = 40.0
                         }
-                        readonlyColumn("Position: x", StartingPosition::playerIndex) {
+                        column("Position: x", ObservableStartingPosition::xProperty) {
                             minWidth = 70.0
                         }
-                        readonlyColumn("Position: z", StartingPosition::playerIndex) {
+                        column("Position: z", ObservableStartingPosition::zProperty) {
                             minWidth = 70.0
                         }
-                        readonlyColumn("Position: y", StartingPosition::playerIndex) {
+                        column("Position: y", ObservableStartingPosition::yProperty) {
                             minWidth = 70.0
                         }
-                        readonlyColumn("Orientation", StartingPosition::playerIndex) {
+                        column("Orientation", ObservableStartingPosition::zAxisOrientationProperty) {
                             minWidth = 70.0
+                        }
+                        onDoubleClick {
+                            if (selectionModel.selectedItem != null) {
+                                find<StartingPositionEditView>(mapOf(StartingPositionEditView::startingPosition to selectionModel.selectedItem)).openModal()
+                            }
                         }
                     }
                 }

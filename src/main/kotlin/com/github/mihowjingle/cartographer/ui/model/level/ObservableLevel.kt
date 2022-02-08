@@ -1,12 +1,13 @@
 package com.github.mihowjingle.cartographer.ui.model.level
 
-import com.github.mihowjingle.cartographer.model.common.Position
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
 import com.github.mihowjingle.cartographer.model.level.Level
+import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservableAsteroid
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
+import com.github.mihowjingle.cartographer.ui.model.entities.ObservableStartingPosition
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
@@ -30,9 +31,9 @@ class ObservableLevel(
     val fog: ObservableFog = ObservableFog(),
     val pebbles: ObservableList<ObservablePebble> = observableListOf(),
     val asteroids: ObservableList<ObservableAsteroid> = observableListOf(),
-    val startingPositions: ObservableList<StartingPosition> = observableListOf(
-        StartingPosition(0, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(1, Position(0.0, 0.0, 0.0), 0.0)
+    val startingPositions: ObservableList<ObservableStartingPosition> = observableListOf(
+        ObservableStartingPosition(0, ObservablePosition()),
+        ObservableStartingPosition(1, ObservablePosition())
     ),
     val clouds: ObservableList<Cloud> = observableListOf(),
     val dustClouds: ObservableList<DustCloud> = observableListOf(),

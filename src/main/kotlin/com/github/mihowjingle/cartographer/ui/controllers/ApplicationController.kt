@@ -2,10 +2,10 @@ package com.github.mihowjingle.cartographer.ui.controllers
 
 import com.github.mihowjingle.cartographer.function.level.toLua
 import com.github.mihowjingle.cartographer.function.level.toPersistent
-import com.github.mihowjingle.cartographer.model.common.Position
-import com.github.mihowjingle.cartographer.model.entities.StartingPosition
+import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservableAsteroid
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
+import com.github.mihowjingle.cartographer.ui.model.entities.ObservableStartingPosition
 import com.github.mihowjingle.cartographer.ui.model.level.ObservableLevel
 import javafx.stage.FileChooser
 import tornadofx.Controller
@@ -55,9 +55,22 @@ class ApplicationController : Controller() {
             }
             if (oldValue < newValue) {
                 while (size < min(newValue, 8)) {
-                    add(StartingPosition(size, Position(0.0, 0.0, 0.0), 0.0))
+                    add(ObservableStartingPosition(size, ObservablePosition()))
                 }
             }
+        }
+    }
+
+    fun remove(startingPosition: ObservableStartingPosition) {
+        with(currentLevel) {
+            if (startingPositions.size <= 2) {
+                error("Cannot remove any more players, 2 is the minimum! (button should be grey, please, report a bug)")
+            }
+            startingPositions.remove(startingPosition)
+            for (i in startingPositions.indices) {
+                startingPositions[i].playerIndex = i
+            }
+            maxPlayers = startingPositions.size
         }
     }
 }

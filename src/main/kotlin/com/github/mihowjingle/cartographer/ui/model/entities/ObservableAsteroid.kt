@@ -1,8 +1,6 @@
 package com.github.mihowjingle.cartographer.ui.model.entities
 
 import com.github.mihowjingle.cartographer.delegate.FxDoublePropertyDelegate
-import com.github.mihowjingle.cartographer.model.common.Orientation
-import com.github.mihowjingle.cartographer.model.common.Position
 import com.github.mihowjingle.cartographer.model.dictionaries.AsteroidType
 import com.github.mihowjingle.cartographer.model.entities.Asteroid
 import com.github.mihowjingle.cartographer.ui.model.common.ObservableOrientation
@@ -44,14 +42,8 @@ class ObservableAsteroid(
 
     fun toPersistent(): Asteroid {
         val type = type ?: error("Pebble type should not be null at this point!")
-        val x = position.x ?: error("Position: x should not be null at this point!")
-        val z = position.z ?: error("Position: z should not be null at this point!")
-        val y = position.y ?: error("Position: y should not be null at this point!")
         val percentOfDefaultRus = percentOfDefaultRus ?: error("Percent of default RUs should not be null at this point!")
-        val xAxis = initialOrientation.xAxis ?: error("Position: x should not be null at this point!")
-        val zAxis = initialOrientation.zAxis ?: error("Position: z should not be null at this point!")
-        val yAxis = initialOrientation.yAxis ?: error("Position: y should not be null at this point!")
-        return Asteroid(type, Position(x, z, y), percentOfDefaultRus, Orientation(xAxis, zAxis, yAxis))
+        return Asteroid(type, position.toPersistent(), percentOfDefaultRus, initialOrientation.toPersistent())
     }
 
     infix fun copyInto(other: ObservableAsteroid) {
