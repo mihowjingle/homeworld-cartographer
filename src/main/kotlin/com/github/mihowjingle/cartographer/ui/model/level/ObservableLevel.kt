@@ -1,5 +1,6 @@
 package com.github.mihowjingle.cartographer.ui.model.level
 
+import com.github.mihowjingle.cartographer.model.common.Position
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
 import com.github.mihowjingle.cartographer.model.entities.*
@@ -29,18 +30,27 @@ class ObservableLevel(
     val fog: ObservableFog = ObservableFog(),
     val pebbles: ObservableList<ObservablePebble> = observableListOf(),
     val asteroids: ObservableList<ObservableAsteroid> = observableListOf(),
-    val startingPositions: ObservableList<StartingPosition> = observableListOf(),
+    val startingPositions: ObservableList<StartingPosition> = observableListOf(
+        StartingPosition(0, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(1, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(2, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(3, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(4, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(5, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(6, Position(0.0, 0.0, 0.0), 0.0),
+        StartingPosition(7, Position(0.0, 0.0, 0.0), 0.0)
+    ),
     val clouds: ObservableList<Cloud> = observableListOf(),
     val dustClouds: ObservableList<DustCloud> = observableListOf(),
     val nebulae: ObservableList<Nebula> = observableListOf(),
     val salvage: ObservableList<Salvage> = observableListOf(),
     val megaliths: ObservableList<Megalith> = observableListOf()
 ) {
-//    init {
-//        if (maxPlayers !in 2..8) { // actually maybe 1 player too? but would that be interesting anyway?
-//            throw IllegalArgumentException("Invalid number of players, $maxPlayers! 2..8 allowed.")
-//        }
-//    }
+    init {
+        if (maxPlayers !in 2..8) {
+            throw IllegalArgumentException("Invalid number of players, $maxPlayers! 2..8 allowed.")
+        }
+    }
 
     val authorProperty = SimpleStringProperty(author)
     var author: String? by authorProperty

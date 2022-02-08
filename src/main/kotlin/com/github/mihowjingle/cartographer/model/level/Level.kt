@@ -24,7 +24,7 @@ data class Level(
     val megaliths: List<Megalith>
 ) {
     init {
-        if (maxPlayers !in 2..8) { // actually maybe 1 player too? but would that be interesting anyway?
+        if (maxPlayers !in 2..8) {
             throw IllegalArgumentException("Invalid number of players, $maxPlayers! 2..8 allowed.")
         }
     }

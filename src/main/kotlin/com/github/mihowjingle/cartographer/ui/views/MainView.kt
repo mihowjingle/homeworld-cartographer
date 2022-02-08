@@ -4,6 +4,7 @@ import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
+import com.github.mihowjingle.cartographer.model.entities.StartingPosition
 import com.github.mihowjingle.cartographer.ui.controllers.ApplicationController
 import com.github.mihowjingle.cartographer.ui.converters.BackgroundConverter
 import com.github.mihowjingle.cartographer.ui.converters.FogTypeConverter
@@ -14,6 +15,7 @@ import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.geometry.Insets
+import javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY
 import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
@@ -58,7 +60,6 @@ class MainView : View("Homeworld Cartographer") {
                     find<PebbleTableView>().openWindow()
                 }
                 item("Salvage")
-                item("Starting positions")
                 separator()
                 item("All objects")
             }
@@ -175,7 +176,7 @@ class MainView : View("Homeworld Cartographer") {
                     }
                 }
                 fieldset("Size") {
-                    field("X") {
+                    field("X, Z, Y") {
                         textfield(controller.currentLevel.size.xProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -184,8 +185,6 @@ class MainView : View("Homeworld Cartographer") {
                                 sizeValid.set(controller.currentLevel.size.valid)
                             }
                         }
-                    }
-                    field("Z") {
                         textfield(controller.currentLevel.size.zProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -194,8 +193,6 @@ class MainView : View("Homeworld Cartographer") {
                                 sizeValid.set(controller.currentLevel.size.valid)
                             }
                         }
-                    }
-                    field("Y") {
                         textfield(controller.currentLevel.size.yProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -207,7 +204,7 @@ class MainView : View("Homeworld Cartographer") {
                     }
                 }
                 fieldset("Sensor manager camera distances") {
-                    field("Min") {
+                    field("Min, Max") {
                         textfield(controller.currentLevel.sensorsManagerCameraDistances.minProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -216,8 +213,6 @@ class MainView : View("Homeworld Cartographer") {
                                 smcdValid.set(controller.currentLevel.sensorsManagerCameraDistances.valid)
                             }
                         }
-                    }
-                    field("Max") {
                         textfield(controller.currentLevel.sensorsManagerCameraDistances.maxProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -249,7 +244,7 @@ class MainView : View("Homeworld Cartographer") {
                             }
                         }
                     }
-                    field("Start") {
+                    field("Start, End") {
                         textfield(controller.currentLevel.fog.startProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -261,8 +256,6 @@ class MainView : View("Homeworld Cartographer") {
                                 controller.currentLevel.fog.activeProperty
                             }
                         }
-                    }
-                    field("End") {
                         textfield(controller.currentLevel.fog.endProperty) {
                             filterInput {
                                 it.controlNewText.canBecomeDouble(allowNegative = false)
@@ -294,6 +287,28 @@ class MainView : View("Homeworld Cartographer") {
                             enableWhen {
                                 controller.currentLevel.fog.activeProperty
                             }
+                        }
+                    }
+                }
+                fieldset("Players") {
+                    tableview(controller.currentLevel.startingPositions) {
+                        columnResizePolicy = CONSTRAINED_RESIZE_POLICY
+                        maxHeight = 218.0
+                        maxHeight = 218.0
+                        readonlyColumn("Index", StartingPosition::playerIndex) {
+                            minWidth = 40.0
+                        }
+                        readonlyColumn("Position: x", StartingPosition::playerIndex) {
+                            minWidth = 70.0
+                        }
+                        readonlyColumn("Position: z", StartingPosition::playerIndex) {
+                            minWidth = 70.0
+                        }
+                        readonlyColumn("Position: y", StartingPosition::playerIndex) {
+                            minWidth = 70.0
+                        }
+                        readonlyColumn("Orientation", StartingPosition::playerIndex) {
+                            minWidth = 70.0
                         }
                     }
                 }
