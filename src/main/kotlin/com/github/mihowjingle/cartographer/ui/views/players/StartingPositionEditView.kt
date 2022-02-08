@@ -29,7 +29,7 @@ class StartingPositionEditView : Fragment() {
     }
 
     override val root = form {
-        fieldset("Editing a startingPosition") {
+        fieldset("Editing player ${editedStartingPosition.playerIndex}") {
             field("Position: x") {
                 textfield(editedStartingPosition.position.xProperty) {
                     filterInput {
