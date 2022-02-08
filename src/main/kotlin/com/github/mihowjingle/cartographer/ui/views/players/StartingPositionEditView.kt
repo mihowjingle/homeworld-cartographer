@@ -25,6 +25,7 @@ class StartingPositionEditView : Fragment() {
     private fun saveAndClose() {
         editedStartingPosition copyInto startingPosition
         close()
+        controller.recheckStartingPositionsValid()
     }
 
     override val root = form {

@@ -2,11 +2,13 @@ package com.github.mihowjingle.cartographer.ui.controllers
 
 import com.github.mihowjingle.cartographer.function.level.toLua
 import com.github.mihowjingle.cartographer.function.level.toPersistent
+import com.github.mihowjingle.cartographer.function.players.valid
 import com.github.mihowjingle.cartographer.ui.model.common.ObservablePosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservableAsteroid
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservableStartingPosition
 import com.github.mihowjingle.cartographer.ui.model.level.ObservableLevel
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.stage.FileChooser
 import tornadofx.Controller
 import tornadofx.FileChooserMode
@@ -15,6 +17,7 @@ import kotlin.math.min
 
 class ApplicationController : Controller() {
 
+    val startingPositionsValid = SimpleBooleanProperty()
     val currentLevel = ObservableLevel()
 
     fun save() {
@@ -58,6 +61,7 @@ class ApplicationController : Controller() {
                     add(ObservableStartingPosition(size, ObservablePosition()))
                 }
             }
+            recheckStartingPositionsValid()
         }
     }
 
@@ -71,6 +75,11 @@ class ApplicationController : Controller() {
                 startingPositions[i].playerIndex = i
             }
             maxPlayers = startingPositions.size
+            recheckStartingPositionsValid()
         }
+    }
+
+    fun recheckStartingPositionsValid() { // todo maybe move all the "valid" properties here like this one?
+        startingPositionsValid.set(valid(currentLevel.startingPositions))
     }
 }

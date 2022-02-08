@@ -44,7 +44,11 @@ class MainView : View("Homeworld Cartographer") {
                 item("Save", "Ctrl+S") {
                     action(controller::save)
                     enableWhen {
-                        sizeValid.and(smcdValid).and(fogValid).and(levelInfoValid)
+                        sizeValid
+                            .and(smcdValid)
+                            .and(fogValid)
+                            .and(levelInfoValid)
+                            .and(controller.startingPositionsValid)
                     }
                 }
                 separator()
