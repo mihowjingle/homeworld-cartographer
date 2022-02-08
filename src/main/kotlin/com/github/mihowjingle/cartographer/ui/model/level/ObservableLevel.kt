@@ -32,13 +32,7 @@ class ObservableLevel(
     val asteroids: ObservableList<ObservableAsteroid> = observableListOf(),
     val startingPositions: ObservableList<StartingPosition> = observableListOf(
         StartingPosition(0, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(1, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(2, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(3, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(4, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(5, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(6, Position(0.0, 0.0, 0.0), 0.0),
-        StartingPosition(7, Position(0.0, 0.0, 0.0), 0.0)
+        StartingPosition(1, Position(0.0, 0.0, 0.0), 0.0)
     ),
     val clouds: ObservableList<Cloud> = observableListOf(),
     val dustClouds: ObservableList<DustCloud> = observableListOf(),

@@ -142,6 +142,9 @@ class MainView : View("Homeworld Cartographer") {
                     field("Max players") {
                         spinner(min = 2, max = 8, amountToStepBy = 1, enableScroll = true, editable = true, property = controller.currentLevel.maxPlayersProperty) {
                             maxWidth = Double.MAX_VALUE
+                            valueProperty().addListener { _, oldValue, newValue ->
+                                controller.syncStartingPositions(oldValue as Int, newValue as Int)
+                            }
                         }
                     }
                     field("Background") {

@@ -2,6 +2,8 @@ package com.github.mihowjingle.cartographer.ui.controllers
 
 import com.github.mihowjingle.cartographer.function.level.toLua
 import com.github.mihowjingle.cartographer.function.level.toPersistent
+import com.github.mihowjingle.cartographer.model.common.Position
+import com.github.mihowjingle.cartographer.model.entities.StartingPosition
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservableAsteroid
 import com.github.mihowjingle.cartographer.ui.model.entities.ObservablePebble
 import com.github.mihowjingle.cartographer.ui.model.level.ObservableLevel
@@ -9,6 +11,7 @@ import javafx.stage.FileChooser
 import tornadofx.Controller
 import tornadofx.FileChooserMode
 import tornadofx.chooseFile
+import kotlin.math.min
 
 class ApplicationController : Controller() {
 
@@ -43,5 +46,18 @@ class ApplicationController : Controller() {
 
     fun addAsteroid(asteroid: ObservableAsteroid) {
         currentLevel.asteroids.add(asteroid)
+    }
+
+    fun syncStartingPositions(oldValue: Int, newValue: Int) {
+        with(currentLevel.startingPositions) {
+            if (oldValue > newValue) {
+                remove(newValue, size)
+            }
+            if (oldValue < newValue) {
+                while (size < min(newValue, 8)) {
+                    add(StartingPosition(size, Position(0.0, 0.0, 0.0), 0.0))
+                }
+            }
+        }
     }
 }
