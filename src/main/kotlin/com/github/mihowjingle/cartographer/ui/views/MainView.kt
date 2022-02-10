@@ -2,6 +2,7 @@ package com.github.mihowjingle.cartographer.ui.views
 
 import com.github.mihowjingle.cartographer.function.strings.canBecomeDouble
 import com.github.mihowjingle.cartographer.function.strings.isNotDigit
+import com.github.mihowjingle.cartographer.function.views.openGenericAlert
 import com.github.mihowjingle.cartographer.model.dictionaries.Background
 import com.github.mihowjingle.cartographer.model.dictionaries.FogType
 import com.github.mihowjingle.cartographer.model.dictionaries.Music
@@ -39,7 +40,9 @@ class MainView : View("Homeworld Cartographer") {
     override val root = vbox {
         menubar {
             menu("File") {
-                item("New", "Ctrl+N")
+                item("New", "Ctrl+N").action {
+                    openGenericAlert(title = "To do", message = "Work in progress...")
+                }
                 item("Load", "Ctrl+L")
                 item("Save", "Ctrl+S") {
                     action(controller::save)
