@@ -16,6 +16,7 @@ import com.github.mihowjingle.cartographer.ui.views.asteroid.AsteroidTableView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleCreateView
 import com.github.mihowjingle.cartographer.ui.views.pebble.PebbleTableView
 import com.github.mihowjingle.cartographer.ui.views.players.StartingPositionEditView
+import javafx.application.Platform
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.geometry.Insets
 import javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY
@@ -25,7 +26,6 @@ import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
 import tornadofx.*
 import java.util.function.UnaryOperator
-import kotlin.system.exitProcess
 import javafx.scene.layout.Background as FXBackground
 
 class MainView : View("Homeworld Cartographer") {
@@ -61,7 +61,7 @@ class MainView : View("Homeworld Cartographer") {
                     // and other app-related config
                 }
                 item("Quit", "Ctrl+Q").action {
-                    exitProcess(0)
+                    Platform.exit()
                 }
             }
             menu("Show") {
